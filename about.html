@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos - Azwaw</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><i class="fas fa-user-tie"></i></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html" class="active">À propos</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu"><li><a href="projets.html">Tous</a></li><li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li><li><a href="projets.html?cat=professional">Pro</a></li></ul></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="Images/cv.pdf" class="btn-cv" download>CV</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main class="container" style="padding:120px 0;">
+    <h2 class="section-title">À propos</h2>
+    <div class="card">
+      <p>Bonjour ! Je m'appelle Azwaw et je suis actuellement étudiant en BTS Services Informatiques aux Organisations (SIO), option SISR, en première année. Passionné par les nouvelles technologies et les systèmes informatiques, je m'intéresse particulièrement à la gestion des réseaux, la maintenance des systèmes et la sécurité informatique.</p>
+      <p>Mon objectif est de développer mes compétences techniques et pratiques pour pouvoir concevoir, administrer et sécuriser des infrastructures informatiques efficaces et fiables. Curieux et motivé, je cherche constamment à apprendre de nouvelles technologies et à relever des défis dans le domaine de l’informatique.</p>
+      <p>Sur ce portfolio, vous pourrez découvrir mes projets, mes compétences techniques et mon parcours.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; margin-top:4rem;">
+      <div class="card">
+        <h3>Formation BTS SIO Spé SISR<br>IFC</h3>
+        <p>Parcours complet en Services Informatiques aux Organisations option SISR.</p>
+        <date>2025 - Présent</date>
+      </div>
+      <div class="card">
+        <h3>Sciences et Technologie : L1<br>USTHB</h3>
+        <p>Tronc commun (math, physique, chimie).</p>
+        <date>2017</date>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><p>© 2025 Azwaw</p></div></footer>
+  <script src="scripts.js"></script>
+</body>
+</html>

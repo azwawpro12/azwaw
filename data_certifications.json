@@ -1,0 +1,28 @@
+{
+  "certifications": [
+    {
+      "id": "cisco-networking-basics",
+      "title": "Notions de Base du Réseau",
+      "issuer": "Cisco Networking Academy",
+      "date": "2025",
+      "description": "Cours Cisco Networking Academy portant sur les bases des réseaux : adressage IP, modèles OSI et TCP/IP, équipements réseau, commutation, routage, et principes fondamentaux de la connectivité.",
+      "image": "Images/certif.png",
+      "icon": "fa-solid fa-graduation-cap",
+      "link": "https://www.credly.com/badges/bab63ca5-7987-4638-8dad-3bf43eadc609/linked_in?t=szsun9"
+    },
+    {
+      "id": "anssi-secnumacademie",
+      "title": "SecNumAcadémie – MOOC Cybersécurité",
+      "issuer": "ANSSI (Agence Nationale de la Sécurité des Systèmes d’Information)",
+      "date": "2025",
+      "description": "Certification SecNumAcadémie de l’ANSSI couvrant les fondamentaux de la cybersécurité : sécurité numérique, menaces, bonnes pratiques, protection des données, gestion des risques et hygiène informatique.",
+      "icon": "fa-solid fa-shield-halved",
+      "image": "Images/attanssi.png",
+      "link":"#"
+      
+
+    }
+  
+    
+  ]
+}

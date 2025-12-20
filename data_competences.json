@@ -1,0 +1,34 @@
+{
+  "competences": [
+    {
+      "icon": "fas fa-network-wired",
+      "title": "Réseaux",
+      "description": "Installation de réseaux, gestion des adresses IP, configuration de VLANs et résolution de problèmes réseau. Utilisation d’outils comme Packet Tracer, équipements Cisco, Zyxel et Netgear.",
+      "level": 90
+    },
+    {
+      "icon": "fas fa-server",
+      "title": "Systèmes d’exploitation",
+      "description": "Administration de systèmes Windows et Linux, gestion des utilisateurs et permissions, configuration des services et installation des OS.",
+      "level": 70
+    },
+    {
+      "icon": "fas fa-layer-group",
+      "title": "Virtualisation",
+      "description": "Utilisation d’hyperviseurs comme Proxmox et VirtualBox pour déploiement et gestion de machines virtuelles, environnements isolés et tests réseau.",
+      "level": 80
+    },
+    {
+      "icon": "fas fa-shield-alt",
+      "title": "Sécurité",
+      "description": "Bonnes pratiques de sécurité, gestion des droits, protection réseau et veille sur les vulnérabilités.",
+      "level": 40
+    },
+    {
+      "icon": "fas fa-tools",
+      "title": "Maintenance & Support IT",
+      "description": "Montage et démontage de PC, installation de logiciels, résolution de pannes et support utilisateur de base.",
+      "level": 87
+    }
+  ]
+}

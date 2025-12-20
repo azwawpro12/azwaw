@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projets - Azwaw</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><i class="fas fa-user-tie"></i></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html" class="active">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu"><li><a href="projets.html">Tous</a></li><li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li><li><a href="projets.html?cat=professional">Pro</a></li></ul></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="Images/cv.pdf" class="btn-cv" download>CV</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main style="padding:120px 0;">
+    <div class="container">
+      <h2 class="section-title">Mes Projets</h2>
+      <p class="section-subtitle">Infrastructure · Réseaux · Sécurité</p>
+      <select id="projectFilter" class="project-dropdown card">
+        <option value="all">Tous les projets</option>
+        <option value="personal">Projets Personnels</option>
+        <option value="school">TP École</option>
+        <option value="professional">Projets Professionnels</option>
+      </select>
+      
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </main>
+
+  <div id="modal" class="modal"><div class="modal-container"><button class="modal-close">×</button><div id="modalContent"></div></div></div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

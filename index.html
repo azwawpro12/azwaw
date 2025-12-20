@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azwaw - Spécialiste SISR</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- <canvas id="bgCanvas"></canvas> --> <!-- Retiré pour minimalisme -->
+
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><i class="fas fa-user-tie"></i></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu"><li><a href="projets.html">Tous</a></li><li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li><li><a href="projets.html?cat=professional">Pro</a></li></ul></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="Images/cv.pdf" class="btn-cv" download>CV</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <section class="hero-section">
+    <div class="container">
+      <h1 class="hero-title">Azwaw <span class="dynamic-text"></span></h1>
+      <p class="hero-role">Étudiant BTS SIO option SISR</p>
+      <p class="hero-description">Réseau • Systèmes • Sécurité</p>
+      <div class="hero-location">Marseille, France</div>
+      <a href="about.html" class="btn">Découvrir mon parcours</a>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-subtitle">Envoyez-moi un message</p>
+      <div class="contact-content">
+        <form id="contactForm" class="contact-form card">
+          <input type="text" name="name" placeholder="Votre nom" required>
+          <input type="email" name="email" placeholder="Votre email" required>
+          <input type="text" name="subject" placeholder="Sujet" required>
+          <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
+          <button type="submit" class="btn">Envoyer</button>
+          <p id="status"></p>
+        </form>
+        <div class="contact-info card">
+          <p><i class="fas fa-envelope"></i> azwawpro@gmail.com</p>
+          <a href="Images/cv.pdf" download class="btn btn-secondary">Télécharger mon CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><p>© 2025 Azwaw</p></div></footer>
+
+  <div id="modal" class="modal"><div class="modal-container"><button class="modal-close">×</button><div id="modalContent"></div></div></div>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>

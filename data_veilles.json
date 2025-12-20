@@ -1,0 +1,15 @@
+{
+  "veilles": [
+   {
+      "id": "veille-packetpushers-2025",
+      "title": "Veille Packet Pushers",
+      "description": "Suivi des podcasts et articles techniques sur les réseaux et systèmes.",
+      "fullDescription": "Réseau de podcasts et articles techniques pour ingénieurs réseaux et systèmes, couvrant l'architecture, l'automatisation et la sécurité des infrastructures. Idéal pour se tenir à jour dans les technologies SISR.",
+      "image": "Images/",
+      "link": "https://packetpushers.net/",
+      "date": "2025-11"
+    }
+   
+  ]
+}
+

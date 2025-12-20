@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "id": "proj-vlan-2025",
+      "title": "Configuration Switch, Routeur et Point d'accès",
+      "description": "Configuration complète de switchs Netgear GS108Tv2 et Zyxel. Création de VLANs multiples (VLAN 10,VLAN 20,VLAN 30). Mise en place de règles d'accès inter-VLAN, limitation de communication entre VLANs sensibles. Tests de validation avec ping et analyse de trames.\n\nMatériel: 1x Netgear GS108Tv2, 1x Zyxel Switch,",
+      "category": "school",
+      "tags": ["VLAN", "Switch", "Netgear", "Zyxel", "Sécurité","IP","DHCP"],
+      "icon": "fa-solid fa-sitemap",
+      "images":"Images/TP_Diagramme.png",
+      "date": "2025-03-15",
+      "links": {
+        "github": "#",
+        "doc": "https://docs.google.com/document/example"
+      }
+    },
+    {
+      "id": "proj-packet-tracer-2025",
+      "title": "Simulation Réseau- Packet Tracer",
+      "description": "Conception d'un réseau complet avec Packet Tracer: 3 VLANs, routeur Cisco 2911, switchs L2, DHCP,. 50 équipements simulés. Tests de performance et diagnostic de pannes.\n\nFonctionnalités: Serveur DHCP dynamique, filtrage IP, monitoring via show commands.",
+      "category": "personal",
+      "tags": ["Packet Tracer", "Cisco", "DHCP", "NAT", "Simulation"],
+      "icon": "fa-solid fa-project-diagram",
+      "images": "Images/certif.png",
+      "date": "2025-02-20",
+      "links": {
+        "github": "#",
+        "demo": "#"
+      }
+    },
+    {
+      "id": "proj-automation-qa-2025",
+      "title": "Projet Automation QA - Tests Automatisés",
+      "description": "Mise en place d'une suite de tests automatisés pour API REST et interface web. Framework Selenium + Java + TestNG. 150+ tests unitaires et d'intégration. CI/CD avec GitHub Actions. Couverture code: 92%.\n\nEnvironnement: Jenkins, Selenium Grid, Java, API REST JSON.",
+      "category": "personal",
+      "tags": ["Selenium", "Java", "TestNG", "CI/CD","API Testing"],
+      "icon": "fa-solid fa-robot",
+      "images": ["proj-automation-1.png"],
+      "date": "2025-01-10",
+      "links": {
+        "github": "https://github.com/azwaw7/NopCommerce/tree/master/NopCommercee",
+        "demo": "#"
+      }
+    }
+  ]
+}
