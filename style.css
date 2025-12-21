@@ -1,7 +1,7 @@
 :root {
   --bg-primary: #F9FAFB; /* Light mode fond principal */
   --bg-secondary: #FFFFFF; /* Cartes light */
-  --bg-card: #FFFFFF;
+  --bg-card: #f1eff5;
   --text-primary: #1F2937; /* Texte principal */
   --text-secondary: #6B7280; /* Texte secondaire */
   --accent-primary: #10B981; /* Vert sécurité */

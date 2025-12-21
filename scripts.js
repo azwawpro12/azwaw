@@ -224,6 +224,18 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
     });
 });
 
+// Typing blagues/motivation (mélange)
+const words = ['Réseaux & cybersécurité 🔒', 'Virtualisation Proxmox 🖥️', 'Admin sys passionné ⚙️', 'Sécuriser l’avenir 🚀'];
+
+// Scroll Animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.style.opacity = 1;
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.section').forEach(sec => observer.observe(sec));
+
 // Init tout (appel des fonctions)
 document.addEventListener('DOMContentLoaded', () => {
   // initGalaxy(); // Décommenter si fond animé voulu

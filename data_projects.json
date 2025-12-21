@@ -7,7 +7,7 @@
       "category": "school",
       "tags": ["VLAN", "Switch", "Netgear", "Zyxel", "Sécurité","IP","DHCP"],
       "icon": "fa-solid fa-sitemap",
-      "images":"Images/TP_Diagramme.png",
+      "images":"Images/Dgtp.png",
       "date": "2025-03-15",
       "links": {
         "github": "#",

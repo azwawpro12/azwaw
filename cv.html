@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV - Azwaw</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><i class="fas fa-user-tie"></i></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu">
+            <li><a href="projets.html">Tous</a></li>
+            <li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li>
+            <li><a href="projets.html?cat=professional">Pro</a></li>
+          </ul>
+        </li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html" class="active">CV</a></li> <!-- Lien actif sur cette page -->
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main style="padding:120px 0;">
+    <div class="container">
+      <h2 class="section-title">Mon CV</h2>
+      <p class="section-subtitle">Visualisez ou téléchargez mon curriculum vitae</p>
+
+      <!-- Bouton Télécharger avec flèche ↓ -->
+      <div style="text-align:center; margin-bottom:2rem;">
+        <a href="Images/cv.pdf" download class="btn" style="font-size:1.5rem;">
+          <i class="fas fa-download"></i> Télécharger le CV
+        </a>
+      </div>
+
+      <!-- Embed PDF Responsive -->
+      <div class="pdf-container card">
+        <iframe src="Images/cv.pdf#toolbar=1&navpanes=1&scrollbar=1" 
+                width="100%" 
+                height="800px" 
+                style="border:none;">
+          <p>Votre navigateur ne supporte pas l'affichage PDF. 
+             <a href="Images/cv.pdf">Cliquez ici pour télécharger</a>.
+          </p>
+        </iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><p>© 2025 Azwaw</p></div></footer>
+  <script src="scripts.js"></script>
+</body>
+</html>
