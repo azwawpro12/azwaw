@@ -146,3 +146,17 @@ body {
   .contact-content { grid-template-columns: 1fr; }
   .submenu { position: static; box-shadow: none; background: none; }
 }
+
+.project-dropdown {
+  padding: 0.75rem 1rem; /* more reasonable */
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--bg-card);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: none; /* remove card shadow */
+}
+.project-dropdown {
+  border: 1px solid #374151; 
+}
