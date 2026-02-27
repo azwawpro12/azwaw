@@ -13,7 +13,7 @@
       "title": "Configuration GPO (Gestion des stratégies de groupe)",
       "description": "gpo pour appliquer des stratégies de sécurité, de configuration et de gestion des utilisateurs dans un environnement Active Directory. Création et gestion de GPO pour renforcer la sécurité et la conformité du réseau.",
       "date": "février 2026",
-      "file": "fi/GPO.pdf",
+      "file": "fi/gpo.pdf",
       "vitrine": "Images/gpo.jpg"
     },
        {
