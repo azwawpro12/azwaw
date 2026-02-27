@@ -472,7 +472,7 @@ function openTCSModal() {
   let html = `
     <h3 style="text-align:center; margin-bottom:1rem;">Tableau de Synthèse E4</h3>
     <div style="height:90vh; position:relative;">
-      <iframe src="Images/TCS.pdf#toolbar=1&navpanes=1&scrollbar=1" 
+      <iframe src="fi/TCS.pdf#toolbar=1&navpanes=1&scrollbar=1" 
               width="100%" 
               height="100%" 
               style="border:none; border-radius:12px;">

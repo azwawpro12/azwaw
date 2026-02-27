@@ -4,7 +4,7 @@
       "id": "ad",
       "title": "Contrôleur de domaine Active Director",
       "description": " Ce guide décrit la configuration de base de la VM AD1 (Windows Server 2022) en tant que premier contrôleur de domaine Active Directory dans un labo Proxmox. ",
-      "file": "Images/Ad.pdf",
+      "file": "fi/Ad.pdf",
       "date": "février 2026",
       "vitrine": "Images/Ad.png"
     },
@@ -13,7 +13,7 @@
       "title": "Configuration GPO (Gestion des stratégies de groupe)",
       "description": "gpo pour appliquer des stratégies de sécurité, de configuration et de gestion des utilisateurs dans un environnement Active Directory. Création et gestion de GPO pour renforcer la sécurité et la conformité du réseau.",
       "date": "février 2026",
-      "file": "Images/GPO.pdf",
+      "file": "fi/GPO.pdf",
       "vitrine": "Images/gpo.jpg"
     },
        {
@@ -21,7 +21,7 @@
       "title": "Procédure Pfsense",
       "description": "configuration firwall pfsense pour sécuriser le réseau et contrôler le trafic. Configuration de règles de pare-feu.",
       "date": "février 2026",
-      "file": "Images/PF.pdf",
+      "file": "fi/PF.pdf",
       "vitrine": "Images/pf.png"
     },
            {
@@ -29,7 +29,7 @@
       "title": "Procédure Zabbix",
       "description": "configuration du serveur Zabbix pour surveiller les ressources réseau et les services.",
       "date": "février 2026",
-      "file": "Images/pz.pdf",
+      "file": "fi/pz.pdf",
       "vitrine": "Images/z.png"
     },
         {
@@ -37,7 +37,7 @@
       "title": "Procédure Exchange",
       "description": "configuration du serveur Exchange pour gérer les services de messagerie.",
       "date": "février 2026",
-      "file": "Images/pe.pdf",
+      "file": "fi/pe.pdf",
       "vitrine": "Images/e.png"
     },
     {
@@ -45,7 +45,7 @@
       "title": "procedure zyxel et netgear",
       "description": "configuration des routeurs Zyxel et Netgear pour le réseau local.",
       "date": "février 2026",
-      "file": "Images/zn.pdf",
+      "file": "fi/zn.pdf",
       "vitrine": "Images/rs.jpg"
     }
     
