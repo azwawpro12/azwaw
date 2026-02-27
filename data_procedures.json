@@ -4,7 +4,7 @@
       "id": "ad",
       "title": "Contrôleur de domaine Active Director",
       "description": " Ce guide décrit la configuration de base de la VM AD1 (Windows Server 2022) en tant que premier contrôleur de domaine Active Directory dans un labo Proxmox. ",
-      "file": "fi/Ad.pdf",
+      "file": "fi/AD.pdf",
       "date": "février 2026",
       "vitrine": "Images/Ad.png"
     },
@@ -21,7 +21,7 @@
       "title": "Procédure Pfsense",
       "description": "configuration firwall pfsense pour sécuriser le réseau et contrôler le trafic. Configuration de règles de pare-feu.",
       "date": "février 2026",
-      "file": "fi/PF.pdf",
+      "file": "fi/Procédure Pfsense.pdf",
       "vitrine": "Images/pf.png"
     },
            {
