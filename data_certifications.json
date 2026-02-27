@@ -16,11 +16,19 @@
       "issuer": "ANSSI (Agence Nationale de la Sécurité des Systèmes d’Information)",
       "date": "2025",
       "description": "Certification SecNumAcadémie de l’ANSSI couvrant les fondamentaux de la cybersécurité : sécurité numérique, menaces, bonnes pratiques, protection des données, gestion des risques et hygiène informatique.",
-      "icon": "fa-solid fa-shield-halved",
-      "image": "Images/attanssi.png",
-      "link":"#"
-      
-
+      "icon": "fa-solid fa-graduation-cap",
+      "image": "Images/anssi.png",
+      "link":"ANSSI.pdf"
+    },
+      {
+      "id": "CNNA 1",
+      "title": " CNNA 1 Présentation des réseaux",
+      "issuer": "NetBFRS Academy – Cisco, pour le centre de formation IFC Cisco Networking Academy )",
+      "date": "2026",
+      "description": " atteste des compétences fondamentales en réseaux informatiques. Elle couvre les bases du routage et de la commutation, les protocoles réseau, la sécurité, l’adressage IP et les principes des réseaux modernes.",
+      "icon": "fa-solid fa-graduation-cap",
+      "image": "Images/certif.png",
+      "link":"https://www.credly.com/badges/307b583f-65bd-4c6a-8b88-0a052ec66179"
     }
   
     

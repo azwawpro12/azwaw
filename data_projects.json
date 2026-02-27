@@ -1,34 +1,37 @@
 {
-  "projects": [
-    {
-      "id": "proj-vlan-2025",
+  "projects": [   
+       {   
+   "id": "proj-vlan-2025",
       "title": "Configuration Switch, Routeur et Point d'accès",
-      "description": "Configuration complète de switchs Netgear GS108Tv2 et Zyxel. Création de VLANs multiples (VLAN 10,VLAN 20,VLAN 30). Mise en place de règles d'accès inter-VLAN, limitation de communication entre VLANs sensibles. Tests de validation avec ping et analyse de trames.\n\nMatériel: 1x Netgear GS108Tv2, 1x Zyxel Switch,",
+      "description": "Configuration complète de switchs Netgear GS108Tv2 et Zyxel.Création de VLANs multiples (VLAN 10,VLAN 20,VLAN 30). Mise en place de règles d'accès inter-VLAN, limitation de communication entre VLANs sensibles. Tests de validation avec ping et analyse de trames.\n\nMatériel: 1x Netgear GS108Tv2, 1x Zyxel Switch",
       "category": "school",
-      "tags": ["VLAN", "Switch", "Netgear", "Zyxel", "Sécurité","IP","DHCP"],
-      "icon": "fa-solid fa-sitemap",
-      "images":"Images/Dgtp.png",
-      "date": "2025-03-15",
-      "links": {
-        "github": "#",
-        "doc": "https://docs.google.com/document/example"
-      }
-    },
-    {
-      "id": "proj-packet-tracer-2025",
-      "title": "Simulation Réseau- Packet Tracer",
-      "description": "Conception d'un réseau complet avec Packet Tracer: 3 VLANs, routeur Cisco 2911, switchs L2, DHCP,. 50 équipements simulés. Tests de performance et diagnostic de pannes.\n\nFonctionnalités: Serveur DHCP dynamique, filtrage IP, monitoring via show commands.",
-      "category": "personal",
-      "tags": ["Packet Tracer", "Cisco", "DHCP", "NAT", "Simulation"],
-      "icon": "fa-solid fa-project-diagram",
-      "images": "Images/certif.png",
-      "date": "2025-02-20",
-      "links": {
+      "tags": ["VLAN", "Switch"],
+      "vitrine": "Images/rs.jpg",    
+      "schema": "Images/dzn.png",       
+      "date": "2025-11-25",
+       "links": {
         "github": "#",
         "demo": "#"
-      }
-    },
-    {
+      },
+      "related_procedures":["zn"]
+    }
+    ,
+     {   
+   "id": "IT1",
+      "title": "Infrastructure IT virtualisée",
+      "description": "Mise en place d’une infrastructure réseau sécurisée avec pfSense et Proxmox .Deux contrôleurs de domaine AD1 et AD2 assurent la gestion centralisée des utilisateurs.GLPI est utilisé pour la gestion du parc informatique et du support, tandis que Zabbix permet la supervision des serveurs et services.Les postes clients Windows sont intégrés au domaine et gérés de manière centralisée.",
+      "category": "school",
+      "tags": ["VLAN", "Switch"],
+      "vitrine": "Images/infra.png",    
+      "schema": "Images/she.jpg",       
+      "date": "2026-02-15",
+       "links": {
+        "github": "",
+        "demo": ""
+      },
+      "related_procedures":["ad", "gpo","pfsense","zabbix","ex"]
+    }
+    ,{
       "id": "proj-automation-qa-2025",
       "title": "Projet Automation QA - Tests Automatisés",
       "description": "Mise en place d'une suite de tests automatisés pour API REST et interface web. Framework Selenium + Java + TestNG. 150+ tests unitaires et d'intégration. CI/CD avec GitHub Actions. Couverture code: 92%.\n\nEnvironnement: Jenkins, Selenium Grid, Java, API REST JSON.",

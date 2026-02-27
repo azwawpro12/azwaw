@@ -18,6 +18,7 @@
         <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
           <ul class="submenu"><li><a href="projets.html">Tous</a></li><li><a href="projets.html?cat=personal">Personnels</a></li>
             <li><a href="projets.html?cat=school">École</a></li><li><a href="projets.html?cat=professional">Pro</a></li></ul></li>
+        <li><a href="Procédures.html">Procédures</a></li>    
         <li><a href="veilles.html">Veilles</a></li>
         <li><a href="certifications.html">Certifications</a></li>
         <li><a href="index.html#contact">Contact</a></li>
@@ -27,7 +28,18 @@
       <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
     </nav>
   </header>
+  <!-- ====================== BOÎTE TCS ====================== -->
+<section style="margin-top: 5rem; text-align: center;">
+  <h2 class="section-title">Tableau de Synthèse E4</h2>
+  <p class="section-subtitle">Réalisation professionnelles - BTS SIO SISR</p>
 
+  <!-- Boîte cliquable -->
+  <div onclick="openTCSModal()" class="tcs-box">
+    <i class="fas fa-file-pdf"></i>
+    <h3>Tableau de Synthèse E4</h3>
+    <p>Cliquez pour ouvrir le PDF</p>
+  </div>
+</section>
   <main style="padding:120px 0;">
     <div class="container">
       <h2 class="section-title">Compétences</h2>
@@ -35,6 +47,13 @@
       <div class="skills-list" id="skillsGrid"></div> <!-- Chargé via JS -->
     </div>
   </main>
+  <!-- ====================== MODAL (obligatoire) ====================== -->
+<div id="modal" class="modal">
+  <div class="modal-container">
+    <button class="modal-close">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
   <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
   <script src="scripts.js"></script>
 </body>
