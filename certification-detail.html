@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certification - Azwaw</title>
+  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu">
+            <li><a href="projets.html">Tous</a></li>
+            <li><a href="projets.html?cat=school">TP École</a></li>
+            <li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=professional">Professionnels</a></li>
+          </ul>
+        </li>
+        <li><a href="Procédures.html">Procédures</a></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html" class="active">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html">CV</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <div class="page-banner">
+    <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
+    </svg>
+    <div class="page-banner-body">
+      <i class="fas fa-certificate pb-icon"></i>
+      <i class="fas fa-award pb-icon"></i>
+      <i class="fas fa-medal pb-icon"></i>
+      <i class="fas fa-trophy pb-icon"></i>
+      <i class="fas fa-star pb-icon"></i>
+      <i class="fas fa-check-circle pb-icon"></i>
+      <h1 class="page-banner-title" id="certTitle">Certification</h1>
+      <p class="page-banner-sub" id="certIssuer">Émetteur • Date</p>
+    </div>
+    <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
+    </svg>
+  </div>
+
+  <main class="container has-page-banner" style="padding: 2rem 0 5rem;">
+    <a href="certifications.html" onclick="event.preventDefault(); history.back();" class="back-btn"><i class="fas fa-arrow-left"></i> Retour</a>
+    <div class="card" style="max-width: 900px; margin: 0 auto;">
+      <div id="certImageContainer" style="text-align:center; margin-bottom:2rem;"><img id="certImage" alt="Cert image" style="max-width:200px; height:auto; display:none; border-radius:12px;"></div>
+      <div id="certDesc" style="line-height:1.8;"></div>
+      <div id="certLinkContainer" style="margin-top:2rem;text-align:center;"><a id="certLink" class="btn" href="#">Voir la certification</a></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="currentYear"></span> Azwaw</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="scripts.js?v=13"></script>
+  <script>
+    async function loadCertDetail() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      if (!id) return;
+      const res = await fetch('data_certifications.json');
+      const data = await res.json();
+      const c = data.certifications.find(x => x.id === id);
+      if (!c) { document.title = 'Certification introuvable'; return; }
+      document.title = c.title + ' - Azwaw';
+      document.getElementById('certTitle').textContent = c.title;
+      document.getElementById('certIssuer').textContent = c.issuer + (c.date ? ' • ' + c.date : '');
+      document.getElementById('certDesc').textContent = c.description || '';
+      if (c.image) {
+        document.getElementById('certImage').src = c.image;
+        document.getElementById('certImage').style.display = 'block';
+      }
+      if (c.link) {
+        const l = document.getElementById('certLink');
+        l.href = c.link;
+        l.target = '_blank';
+      }
+    }
+    loadCertDetail();
+  </script>
+</body>
+</html>

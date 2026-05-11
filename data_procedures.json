@@ -1,0 +1,72 @@
+{
+  "procedures": [
+    {
+      "id": "ad",
+      "title": "premier Contrôleur de domaine Active Directory",
+      "description": "Ce guide décrit la configuration de base de la VM AD1 (Windows Server 2022) en tant que premier contrôleur de domaine Active Directory dans un labo Proxmox.",
+      "file": "fi/AD1.pdf",
+      "date": "février 2026",
+      "vitrine": "Images/Ad.png"
+    },
+    {
+      "id": "ad2",
+      "title": " Second Contrôleur de domaine Active Directory",
+      "description": "Ce guide décrit la configuration de base de la VM AD2 (Windows Server 2022) en tant que second contrôleur de domaine Active Directory dans un labo Proxmox.",
+      "file": "fi/AD2.pdf",
+      "date": "février 2026",
+      "vitrine": "Images/Ad.png"
+    },
+    
+     {
+      "id": "gpo",
+      "title": "Configuration GPO (Gestion des stratégies de groupe)",
+      "description": "gpo pour appliquer des stratégies de sécurité, de configuration et de gestion des utilisateurs dans un environnement Active Directory. Création et gestion de GPO pour renforcer la sécurité et la conformité du réseau.",
+      "date": "février 2026",
+      "file": "fi/gpo.pdf",
+      "vitrine": "Images/gpo.jpg"
+    },
+       {
+      "id": "pfsense",
+      "title": "Procédure Pfsense",
+      "description": "Configuration firewall pfSense pour sécuriser le réseau et contrôler le trafic. Configuration de règles de pare-feu.",
+      "date": "février 2026",
+      "file": "fi/Procédure Pfsense.pdf",
+      "vitrine": "Images/pf.png"
+    },
+           {
+      "id": "zabbix",
+      "title": "Procédure Zabbix",
+      "description": "configuration du serveur Zabbix pour surveiller les ressources réseau et les services.",
+      "date": "février 2026",
+      "file": "fi/pz.pdf",
+      "vitrine": "Images/z.png"
+    },
+        {
+      "id": "ex",
+      "title": "Procédure Exchange",
+      "description": "configuration du serveur Exchange pour gérer les services de messagerie.",
+      "date": "février 2026",
+      "file": "fi/Exch.pdf",
+      "vitrine": "Images/e.png"
+    },
+        {
+      "id": "prox",
+      "title": "Procédure Proxmox",
+      "description": "Ce guide décrit la creation des machine Virtuelles et la configuration sur proxmox.",
+      "date": "février 2026",
+      "file": "fi/Prox.pdf",
+      "vitrine": "Images/prox.png"
+    },
+    {
+      "id": "zn",
+      "title": "Procédure Zyxel et Netgear",
+      "description": "Configuration des switches Zyxel et Netgear pour le réseau local.",
+      "date": "October 2025",
+      "file": "fi/zn.pdf",
+      "vitrine": "Images/rs.jpg"
+    }
+    
+    
+    
+  ]
+}

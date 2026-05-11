@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV - Azwaw</title>
+  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu">
+            <li><a href="projets.html">Tous</a></li>
+            <li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li>
+            <li><a href="projets.html?cat=professional">Pro</a></li>
+          </ul>
+        </li>
+        <li><a href="Procédures.html">Procédures</a></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html" class="active">CV</a></li> <!-- Lien actif sur cette page -->
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <div class="page-banner">
+    <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
+    </svg>
+    <div class="page-banner-body">
+      <i class="fas fa-file-pdf pb-icon"></i>
+      <i class="fas fa-user pb-icon"></i>
+      <i class="fas fa-id-card pb-icon"></i>
+      <i class="fas fa-briefcase pb-icon"></i>
+      <i class="fas fa-star pb-icon"></i>
+      <i class="fas fa-download pb-icon"></i>
+      <h1 class="page-banner-title">Mon CV</h1>
+      <p class="page-banner-sub">Visualisez ou téléchargez mon curriculum vitae</p>
+    </div>
+    <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
+    </svg>
+  </div>
+
+  <main style="padding: 2rem 0 5rem;" class="has-page-banner">
+    <div class="container">
+
+      <!-- Bouton Télécharger avec flèche ↓ -->
+      <div style="text-align:center; margin-bottom:2rem;">
+        <a href="fi/cv.pdf" download class="btn" style="font-size:1.5rem;">
+          <i class="fas fa-download"></i> Télécharger le CV
+        </a>
+      </div>
+
+      <!-- Embed PDF Responsive -->
+      <div class="pdf-container card">
+        <iframe src="fi/cv.pdf" 
+                width="100%" 
+                height="800px" 
+                style="border:none;">
+          <p>Votre navigateur ne supporte pas l'affichage PDF. 
+             <a href="fi/cv.pdf">Cliquez ici pour télécharger</a>.
+          </p>
+        </iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+  <script src="scripts.js?v=13"></script>
+</body>
+</html>

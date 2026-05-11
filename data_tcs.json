@@ -1,0 +1,101 @@
+{
+  "tcs": {
+    "titre": "Tableau de synthèse des réalisations professionnelles",
+    "realisations": [
+      {
+        "realisation": "Manipulation Routeur (Zyxel) et Switch avec création de VLAN",
+        "periode": "oct-24 → déc-24",
+        "gpi": true,
+        "incidents": true,
+        "presence": false,
+        "projet": true,
+        "service": false,
+        "developpement": false
+      },
+      {
+        "realisation": "Cisco Packet Tracer + Certification Notions de Base du Réseau",
+        "periode": "oct-24 → nov-24",
+        "gpi": false,
+        "incidents": false,
+        "presence": false,
+        "projet": false,
+        "service": false,
+        "developpement": true
+      },
+      {
+        "realisation": "Hyperviseur PROXMOX et Virtualisation",
+        "periode": "nov-24 → déc-24",
+        "gpi": true,
+        "incidents": true,
+        "presence": false,
+        "projet": true,
+        "service": true,
+        "developpement": true
+      },
+      {
+        "realisation": "Mise en place et Création de boîte mail Exchange",
+        "periode": "nov-24 → déc-24",
+        "gpi": true,
+        "incidents": true,
+        "presence": true,
+        "projet": true,
+        "service": true,
+        "developpement": true
+      },
+      {
+        "realisation": "Mise en place et déploiement de GPO",
+        "periode": "déc-24",
+        "gpi": true,
+        "incidents": true,
+        "presence": false,
+        "projet": false,
+        "service": false,
+        "developpement": false
+      },
+      {
+        "realisation": "Installation et configuration de l'Active Directory + réplication Windows Server 2025",
+        "periode": "déc-24",
+        "gpi": true,
+        "incidents": true,
+        "presence": false,
+        "projet": false,
+        "service": true,
+        "developpement": false
+      },
+      {
+        "realisation": "Configuration du point d’accès WIFI Unifi U7 Lite",
+        "periode": "janv-25",
+        "gpi": true,
+        "incidents": false,
+        "presence": false,
+        "projet": false,
+        "service": true,
+        "developpement": false
+      },
+      {
+        "realisation": "Serveur environnement de travail Exchange/GLPI",
+        "periode": "mai-25",
+        "gpi": true,
+        "incidents": true,
+        "presence": false,
+        "projet": false,
+        "service": true,
+        "developpement": false
+      },
+      {
+        "realisation": "Mise en place d’un VPN OpenVPN avec synchronisation AD/LDAPS",
+        "periode": "sep-25",
+        "gpi": true,
+        "incidents": true,
+        "presence": false,
+        "projet": false,
+        "service": true,
+        "developpement": false
+      }
+     
+      
+      
+     
+    ]
+  }
+}
