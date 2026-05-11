@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>À propos - Azwaw</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=16">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
 </head>
 <body>
   <header class="header">
     <nav class="nav-container">
-      <div class="logo"><a href="index.html"><i class="fas fa-user-tie"></i></a></div>
+      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
       <ul class="nav-menu">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="about.html" class="active">À propos</a></li>
@@ -29,29 +30,65 @@
     </nav>
   </header>
 
-  <main class="container" style="padding:120px 0;">
-    <h2 class="section-title">À propos</h2>
-    <div class="card">
-      <p>Bonjour ! Je m'appelle Azwaw et je suis actuellement étudiant en BTS Services Informatiques aux Organisations (SIO), option SISR, en première année. Passionné par les nouvelles technologies et les systèmes informatiques, je m'intéresse particulièrement à la gestion des réseaux, la maintenance des systèmes et la sécurité informatique.</p>
-      <p>Mon objectif est de développer mes compétences techniques et pratiques pour pouvoir concevoir, administrer et sécuriser des infrastructures informatiques efficaces et fiables. Curieux et motivé, je cherche constamment à apprendre de nouvelles technologies et à relever des défis dans le domaine de l’informatique.</p>
-      <p>Sur ce portfolio, vous pourrez découvrir mes projets, mes compétences techniques et mon parcours.</p>
+  <div class="page-banner">
+    <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
+    </svg>
+    <div class="page-banner-body">
+      <i class="fas fa-user-tie pb-icon"></i>
+      <i class="fas fa-graduation-cap pb-icon"></i>
+      <i class="fas fa-heart pb-icon"></i>
+      <i class="fas fa-briefcase pb-icon"></i>
+      <i class="fas fa-map-marker-alt pb-icon"></i>
+      <i class="fas fa-clock pb-icon"></i>
+      <h1 class="page-banner-title">À propos</h1>
+      <p class="page-banner-sub">Mon parcours et ma vision</p>
+    </div>
+    <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
+    </svg>
+  </div>
+
+  <main class="container has-page-banner" style="padding: 2rem 0 5rem;">
+
+    <div class="card about-bio reveal">
+      <p>Étudiant en BTS SIO option SISR, je suis passionné par les réseaux, les systèmes et la cybersécurité. Mon objectif : concevoir, administrer et sécuriser des infrastructures informatiques robustes et fiables.</p>
+      <p>Curieux et motivé, je cherche constamment à apprendre de nouvelles technologies et à relever des défis dans le domaine de l’informatique.</p>
+      <div class="about-keywords">
+        <span class="tag">Réseaux</span>
+        <span class="tag">Sécurité</span>
+        <span class="tag">Virtualisation</span>
+        <span class="tag">Active Directory</span>
+        <span class="tag">pfSense</span>
+        <span class="tag">Linux</span>
+      </div>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; margin-top:4rem;">
-      <div class="card">
-        <h3>Formation BTS SIO Spé SISR<br>IFC</h3>
-        <p>Parcours complet en Services Informatiques aux Organisations option SISR.</p>
-        <date>2025 - Présent</date>
+    <p class="about-section-label">Parcours</p>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-marker"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
+        <div class="timeline-content card">
+          <div class="timeline-date">2025 — Présent</div>
+          <h3>BTS SIO Spécialité SISR</h3>
+          <p class="timeline-org"><i class="fas fa-building" aria-hidden="true"></i> IFC — Marseille</p>
+          <p>Administration systèmes et réseaux : infrastructure, virtualisation, sécurité et gestion de parc informatique.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Sciences et Technologie : L1<br>USTHB</h3>
-        <p>Tronc commun (math, physique, chimie).</p>
-        <date>2017</date>
+      <div class="timeline-item reveal">
+        <div class="timeline-marker"><i class="fas fa-flask" aria-hidden="true"></i></div>
+        <div class="timeline-content card">
+          <div class="timeline-date">2017</div>
+          <h3>Sciences et Technologie L1</h3>
+          <p class="timeline-org"><i class="fas fa-building" aria-hidden="true"></i> USTHB — Algérie</p>
+          <p>Tronc commun : mathématiques, physique, chimie.</p>
+        </div>
       </div>
     </div>
   </main>
 
-  <footer class="footer"><div class="container"><p>© 2025 Azwaw</p></div></footer>
-  <script src="scripts.js"></script>
+  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+  <script src="scripts.js?v=13"></script>
 </body>
 </html>

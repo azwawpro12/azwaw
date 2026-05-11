@@ -1,35 +1,23 @@
-// Variables globales pour données dynamiques (évolutivité)
+// Variables globales pour données dynamiques
 let projects = [];
 let certifications = [];
 let veilles = [];
-let procedures = [];  // Nouveau
+let procedures = [];
 
-// Init Galaxy (optionnel, décommenter si voulu pour fond animé)
-// function initGalaxy() {
-//   const canvas = document.getElementById('bgCanvas');
-//   if (!canvas) return;
-//   const ctx = canvas.getContext('2d');
-//   canvas.width = innerWidth; canvas.height = innerHeight;
-//   // ... (ton code original complet pour stars, draw, etc.)
-//   window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; });
-// }
-
-// Typing pour hero
-function initTyping() {
-  if (!document.querySelector('.dynamic-text')) return;
-  const words = ['VLANs & cafés ☕', 'Pare-feux & pizzas 🍕', 'Scripts & musique 🎵'];
-  let i = 0, j = 0, deleting = false;
-  const el = document.querySelector('.dynamic-text');
-  function type() {
-    const word = words[i];
-    el.textContent = deleting ? word.substring(0, j - 1) : word.substring(0, j + 1);
-    j += deleting ? -1 : 1;
-    if (!deleting && j === word.length) { deleting = true; setTimeout(type, 1500); return; }
-    if (deleting && j === 0) { deleting = false; i = (i + 1) % words.length; setTimeout(type, 500); return; }
-    setTimeout(type, deleting ? 60 : 100);
-  }
-  setTimeout(type, 800);
+function renderSkeleton(gridId, count = 3) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.innerHTML = Array.from({ length: count }, () => `
+    <div class="skeleton-card">
+      <div class="skeleton skeleton-img"></div>
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text-short"></div>
+    </div>
+  `).join('');
 }
+
+
 
 // Dark/Light Mode
 const themeToggle = document.getElementById('themeToggle');
@@ -57,7 +45,7 @@ function updateToggleIcon(theme) {
 // Chargement projets avec logs
 async function loadProjects() {
   if (!document.getElementById('projectsGrid')) return;
-
+  renderSkeleton('projectsGrid', 3);
   try {
     const res = await fetch('data_projects.json');
     if (!res.ok) throw new Error(`Erreur fetch projets : ${res.status}`);
@@ -88,7 +76,7 @@ async function loadProjects() {
     console.error("Erreur chargement projets :", err);
   }
 }
-// Rendu + clic attaché après (méthode la plus stable)
+// Rendu projets — clic = page dédiée projet-detail.html
 function renderProjects(projs, category = 'all') {
   const grid = document.getElementById('projectsGrid');
   if (!grid) return;
@@ -97,27 +85,32 @@ function renderProjects(projs, category = 'all') {
     ? projs
     : projs.filter(p => p.category === category);
 
+  const categoryLabel = { school: 'TP École', personal: 'Personnel', professional: 'Professionnel' };
+
   grid.innerHTML = filtered.map(p => `
-    <div class="project-card card" data-id="${p.id}">
+    <div class="project-card card" data-id="${p.id}" onclick="window.location.href='projet-detail.html?id=${p.id}'" style="cursor:pointer;">
       ${p.vitrine ? `
         <div class="vitrine-container">
           <img src="${p.vitrine}" alt="${p.title}" class="project-vitrine">
         </div>
       ` : ''}
-      
-      <i class="${p.icon || 'fas fa-project-diagram'}"></i>
+      <div style="padding: 1rem 0 0.5rem;">
+        ${p.category ? `<span style="background:rgba(14,116,144,0.1);color:#0E7490;padding:0.2rem 0.7rem;border-radius:6px;font-size:0.76rem;font-weight:600;border:1px solid rgba(14,116,144,0.2);">${categoryLabel[p.category] || p.category}</span>` : ''}
+      </div>
       <h4>${p.title}</h4>
-      <p>${p.description.substring(0, 100)}${p.description.length > 100 ? '...' : ''}</p>
+      <p>${p.description.substring(0, 110)}${p.description.length > 110 ? '...' : ''}</p>
       <div class="tags">${p.tags ? p.tags.map(t => `<span>${t}</span>`).join('') : ''}</div>
+      ${p.related_procedures && p.related_procedures.length ? `
+        <div style="margin-top:0.8rem; padding-top:0.8rem; border-top:1px solid rgba(255,255,255,0.06);">
+          <span style="font-size:0.82rem; color:var(--text-secondary);"><i class="fas fa-file-pdf"></i> ${p.related_procedures.length} procédure${p.related_procedures.length > 1 ? 's' : ''} liée${p.related_procedures.length > 1 ? 's' : ''}</span>
+        </div>` : ''}
+      <div style="margin-top:1rem;">
+        <span style="display:inline-flex;align-items:center;gap:0.4rem;background:var(--accent-primary);color:white;padding:0.45rem 1.1rem;border-radius:20px;font-size:0.88rem;font-weight:600;">
+          Voir le projet <i class="fas fa-arrow-right"></i>
+        </span>
+      </div>
     </div>
   `).join('');
-
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('click', function () {
-      const id = this.dataset.id;
-      openModal(id);
-    });
-  });
 }
 
 // Modal robuste
@@ -163,7 +156,7 @@ function openModal(id) {
   // Procédures liées (comme avant)
   if (p.related_procedures && Array.isArray(p.related_procedures) && p.related_procedures.length > 0) {
     html += `
-      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee;">
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
         <h4>Procédures liées (${p.related_procedures.length})</h4>
         <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
     `;
@@ -210,13 +203,14 @@ function openModal(id) {
 // Chargement Certifications
 async function loadCerts() {
   if (!document.getElementById('certificationsGrid')) return;
+  renderSkeleton('certificationsGrid', 3);
   try {
     const res = await fetch('data_certifications.json');
     if (!res.ok) throw new Error('Erreur fetch certifications');
     const data = await res.json();
     certifications = data.certifications || [];
     document.getElementById('certificationsGrid').innerHTML = certifications.map(c => `
-      <div class="cert-card card" onclick="openCertModal('${c.id}')">
+      <div class="cert-card card" onclick="window.location.href='certification-detail.html?id=${c.id}'" style="cursor:pointer;">
         <i class="${c.icon || 'fas fa-certificate'}"></i>
         <h4>${c.title}</h4>
         <p>${c.issuer} – ${c.date}</p>
@@ -269,6 +263,7 @@ function openCertModal(id) {
 }
 
 async function loadProcedures() {
+  renderSkeleton('proceduresGrid', 4);
   try {
     const res = await fetch('data_procedures.json');
     if (!res.ok) throw new Error('Fichier data_procedures.json introuvable');
@@ -320,7 +315,7 @@ function renderProcedures(procs) {
       `}
       <div class="card-content">
         <h4>${p.title}</h4>
-        <p class="card-date">📅 ${p.date}</p>
+        <p class="card-date"><i class="fas fa-calendar-alt"></i> ${p.date}</p>
         <p>${p.description.substring(0, 120)}${p.description.length > 120 ? '...' : ''}</p>
       </div>
     </div>
@@ -328,9 +323,9 @@ function renderProcedures(procs) {
 }
 
 // Chargement Veilles
-// Chargement Veilles
 async function loadVeilles() {
   if (!document.getElementById('veillesGrid')) return;
+  renderSkeleton('veillesGrid', 4);
   try {
     const res = await fetch('data_veilles.json');
     if (!res.ok) throw new Error('Erreur fetch veilles');
@@ -347,7 +342,7 @@ async function loadVeilles() {
 // Rendu des cartes Veilles (même style que Procédures)
 function renderVeilles(veils) {
   document.getElementById('veillesGrid').innerHTML = veils.map(v => `
-    <div class="procedure-card card veille-card" onclick="openVeilleModal('${v.id}')">
+    <div class="procedure-card card veille-card" onclick="window.location.href='veille-detail.html?id=${v.id}'" style="cursor:pointer;">
       ${v.vitrine || v.image ? `
         <div class="vitrine-container">
           <img src="${v.vitrine || v.image}" alt="${v.title}" class="procedure-vitrine">
@@ -357,45 +352,7 @@ function renderVeilles(veils) {
       `}
       <div class="card-content">
         <h4>${v.title}</h4>
-        <p class="card-date">📅 ${v.date}</p>
-        <p>${v.description}</p>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Modal Veille (avec gros bouton lien externe)
-// Chargement Veilles
-// Chargement Veilles
-async function loadVeilles() {
-  if (!document.getElementById('veillesGrid')) return;
-  try {
-    const res = await fetch('data_veilles.json');
-    if (!res.ok) throw new Error('Erreur fetch veilles');
-    const data = await res.json();
-    veilles = data.veilles || [];
-    renderVeilles(veilles);
-    console.log('✅ Veilles chargées :', veilles.length);
-  } catch (err) {
-    console.error(err);
-    document.getElementById('veillesGrid').innerHTML = '<p>Erreur de chargement des veilles.</p>';
-  }
-}
-
-// Rendu des cartes (exactement le même style que Procédures)
-function renderVeilles(veils) {
-  document.getElementById('veillesGrid').innerHTML = veils.map(v => `
-    <div class="procedure-card card veille-card" onclick="openVeilleModal('${v.id}')">
-      ${v.vitrine ? `
-        <div class="vitrine-container">
-          <img src="${v.vitrine}" alt="${v.title}" class="procedure-vitrine">
-        </div>
-      ` : `
-        <i class="${v.icon || 'fas fa-rss'} procedure-icon"></i>
-      `}
-      <div class="card-content">
-        <h4>${v.title}</h4>
-        <p class="card-date">📅 ${v.date}</p>
+        <p class="card-date"><i class="fas fa-calendar-alt"></i> ${v.date}</p>
         <p>${v.description}</p>
       </div>
     </div>
@@ -459,39 +416,96 @@ async function loadCompetences() {
     document.getElementById('skillsGrid').innerHTML = '<p>Erreur de chargement des compétences.</p>';
   }
 }
-// ====================== TABLEAU TCS E4 ======================
+// ====================== TABLEAU TCS E4 INTERACTIF ======================
+async function loadTCS() {
+  try {
+    const res = await fetch('data_tcs.json');
+    if (!res.ok) return;
+    const data = await res.json();
+    window._tcsData = data.tcs;
+  } catch(e) { console.warn('TCS non chargé:', e); }
+}
+
 function openTCSModal() {
   const modal = document.getElementById('modal');
   const content = document.getElementById('modalContent');
+  if (!modal || !content) return;
 
-  if (!modal || !content) {
-    console.error("Modal non trouvé sur cette page");
-    return;
-  }
-
-  let html = `
-    <h3 style="text-align:center; margin-bottom:1rem;">Tableau de Synthèse E4</h3>
-    <div style="height:90vh; position:relative;">
-      <iframe src="fi/TCS.pdf#toolbar=1&navpanes=1&scrollbar=1" 
-              width="100%" 
-              height="100%" 
-              style="border:none; border-radius:12px;">
-      </iframe>
+  content.innerHTML = `
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
+      <h3 style="margin:0; background:linear-gradient(135deg,#047857,#0E7490); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+        Tableau de Synthèse E5
+      </h3>
+      <a href="fi/TCS.pdf" target="_blank" rel="noopener noreferrer" class="btn" style="font-size:0.85rem; padding:0.5rem 1.2rem; flex-shrink:0;">
+        <i class="fas fa-arrow-up-right-from-square"></i> Ouvrir
+      </a>
+    </div>
+    <div style="height:80vh; border-radius:12px; overflow:hidden; border:1px solid var(--border);">
+      <iframe src="fi/TCS.pdf" width="100%" height="100%" style="border:none; display:block;"></iframe>
     </div>`;
 
-  content.innerHTML = html;
   modal.classList.add('is-open');
 }
-// Fermeture Modal & Menu Mobile
+// Fermeture Modal
 document.addEventListener('click', e => {
   const modal = document.getElementById('modal');
   if (e.target === modal || e.target.classList.contains('modal-close')) {
     modal.classList.remove('is-open');
   }
 });
-document.getElementById('mobileToggle')?.addEventListener('click', () => {
+
+// Menu Mobile
+const mobileToggleBtn = document.getElementById('mobileToggle');
+mobileToggleBtn?.addEventListener('click', () => {
   document.querySelector('.nav-menu').classList.toggle('active');
+  mobileToggleBtn.classList.toggle('open');
 });
+
+// Dropdown Navigation
+function initDropdowns() {
+  const dropdowns = document.querySelectorAll('.dropdown');
+  const isMobile = () => window.innerWidth <= 900;
+
+  dropdowns.forEach(dropdown => {
+    let closeTimer;
+
+    // Desktop : survol avec délai de fermeture (évite la fermeture accidentelle)
+    dropdown.addEventListener('mouseenter', () => {
+      if (isMobile()) return;
+      clearTimeout(closeTimer);
+      dropdown.classList.add('open');
+    });
+    dropdown.addEventListener('mouseleave', () => {
+      if (isMobile()) return;
+      closeTimer = setTimeout(() => dropdown.classList.remove('open'), 150);
+    });
+
+    // Mobile : clic pour toggle
+    const trigger = dropdown.querySelector('a');
+    trigger?.addEventListener('click', (e) => {
+      if (!isMobile()) return;
+      e.preventDefault();
+      const isOpen = dropdown.classList.contains('open');
+      // ferme tous les autres
+      dropdowns.forEach(d => d.classList.remove('open'));
+      if (!isOpen) dropdown.classList.add('open');
+    });
+  });
+
+  // Fermeture sur clic extérieur
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      dropdowns.forEach(d => d.classList.remove('open'));
+    }
+  });
+
+  // Fermeture sur resize si on passe en desktop
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      dropdowns.forEach(d => d.classList.remove('open'));
+    }
+  });
+}
 
 // Formulaire Contact avec Validation
 document.getElementById('contactForm')?.addEventListener('submit', function(e) {
@@ -517,8 +531,12 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
   status.textContent = 'Envoi en cours...';
   status.style.color = 'var(--accent-secondary)';
 
-  // EmailJS (Remplace par tes IDs réels !)
-  emailjs.init("PZ1SG6m4MUTM_Lhof"); // Ton public key EmailJS
+  const submitBtn = this.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+
+  // EmailJS
+  emailjs.init("PZ1SG6m4MUTM_Lhof");
   const serviceID = "service_puah3qe";
   const templateID = "template_oza7n4t";
 
@@ -526,16 +544,17 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
     .then(() => {
       status.textContent = 'Message envoyé ! Je vous réponds bientôt.';
       status.style.color = 'var(--accent-primary)';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Envoyer';
       this.reset();
     }, (err) => {
       status.textContent = 'Erreur d\'envoi. Réessayez.';
       status.style.color = 'var(--accent-tertiary)';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Envoyer';
       console.error('EmailJS erreur:', err);
     });
 });
-
-// Typing blagues/motivation (mélange)
-const words = ['Réseaux & cybersécurité 🔒', 'Virtualisation Proxmox 🖥️', 'Admin sys passionné ⚙️', 'Sécuriser l’avenir 🚀'];
 
 // Scroll Animations
 const observer = new IntersectionObserver(entries => {
@@ -546,14 +565,114 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.section').forEach(sec => observer.observe(sec));
 
+
+// ====================== FONCTIONNALITÉS PREMIUM ======================
+
+// 1. Progress bar de scroll
+function initScrollProgress() {
+  const bar = document.createElement('div');
+  bar.id = 'scrollProgress';
+  document.body.prepend(bar);
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+  }, { passive: true });
+}
+
+// 2. Bouton Back to Top
+function initBackToTop() {
+  const btn = document.createElement('button');
+  btn.id = 'backToTop';
+  btn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+  btn.title = 'Retour en haut';
+  document.body.appendChild(btn);
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+// 3. Scroll reveal sur toutes les cartes
+function initScrollReveal() {
+  const selector = '.card, .project-card, .procedure-card, .cert-card, .skill-card, .veille-card, .reveal';
+  const els = document.querySelectorAll(selector);
+  if (!els.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => {
+    el.classList.add('reveal');
+    obs.observe(el);
+  });
+}
+
+// 4. Stats animées dans le hero (seulement sur index.html)
+async function initHeroStats() {
+  const hero = document.querySelector('.hero-section .hero-inner') || document.querySelector('.hero-section .container');
+  if (!hero || !document.querySelector('.hero-name, .hero-title')) return;
+  try {
+    const [projRes, certRes, procRes] = await Promise.all([
+      fetch('data_projects.json'),
+      fetch('data_certifications.json'),
+      fetch('data_procedures.json')
+    ]);
+    const [pj, ce, pr] = await Promise.all([projRes.json(), certRes.json(), procRes.json()]);
+    const stats = [
+      { n: (pj.projects||[]).length, label: 'Projets' },
+      { n: (ce.certifications||[]).length, label: 'Certifications' },
+      { n: (pr.procedures||[]).length, label: 'Procédures' },
+    ];
+    const statsDiv = document.createElement('div');
+    statsDiv.className = 'hero-stats';
+    statsDiv.innerHTML = stats.map((s, i) => `
+      ${i > 0 ? '<div class="hero-stat-separator"></div>' : ''}
+      <div class="hero-stat">
+        <div class="hero-stat-number" data-target="${s.n}">0</div>
+        <div class="hero-stat-label">${s.label}</div>
+      </div>`).join('');
+    const btn = hero.querySelector('.btn');
+    if (btn) hero.insertBefore(statsDiv, btn);
+    else hero.appendChild(statsDiv);
+    // Compteurs animés
+    statsDiv.querySelectorAll('.hero-stat-number').forEach(el => {
+      const target = +el.dataset.target;
+      let cur = 0;
+      const step = Math.max(1, Math.ceil(target / 20));
+      const t = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = cur;
+        if (cur >= target) clearInterval(t);
+      }, 60);
+    });
+  } catch(e) {}
+}
+
+// Remplissage de l'année dans les footers
+function initCurrentYear() {
+  document.querySelectorAll('#currentYear').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
+}
+
 // Init tout (appel des fonctions)
 document.addEventListener('DOMContentLoaded', () => {
   // initGalaxy(); // Décommenter si fond animé voulu
-  initTyping();
   loadProjects();
   loadCerts();
   loadVeilles();
   loadCompetences();
   loadProcedures();
   loadTCS();
+  initDropdowns();
+  initScrollProgress();
+  initBackToTop();
+  initScrollReveal();
+  initHeroStats();
+  initCurrentYear();
 });

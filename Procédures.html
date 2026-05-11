@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Procédures - Azwaw</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=16">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
 </head>
 <body>
   <header class="header">
     <nav class="nav-container">
-      <div class="logo"><a href="index.html"><i class="fas fa-user-tie"></i></a></div>
+      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
       <ul class="nav-menu">
         <li><a href="index.html">Accueil</a></li>
         <li><a href="about.html">À propos</a></li>
@@ -29,17 +30,34 @@
     </nav>
   </header>
 
-  <main style="padding:120px 0;">
+  <div class="page-banner">
+    <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
+    </svg>
+    <div class="page-banner-body">
+      <i class="fas fa-file-alt pb-icon"></i>
+      <i class="fas fa-list-ul pb-icon"></i>
+      <i class="fas fa-clipboard pb-icon"></i>
+      <i class="fas fa-book pb-icon"></i>
+      <i class="fas fa-file-code pb-icon"></i>
+      <i class="fas fa-check-double pb-icon"></i>
+      <h1 class="page-banner-title">Procédures</h1>
+      <p class="page-banner-sub">Documents et guides de procédures</p>
+    </div>
+    <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
+    </svg>
+  </div>
+
+  <main style="padding: 2rem 0 5rem;" class="has-page-banner">
     <div class="container">
-      <h2 class="section-title">Procédures</h2>
-      <p class="section-subtitle">Documents et guides de procédures</p>
       <div class="procedures-grid" id="proceduresGrid"></div>
     </div>
   </main>
 
   <div id="modal" class="modal"><div class="modal-container"><button class="modal-close">×</button><div id="modalContent"></div></div></div>
 
-  <footer class="footer"><div class="container"><p>© 2025 Azwaw</p></div></footer>
-  <script src="scripts.js"></script>
+  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+  <script src="scripts.js?v=13"></script>
 </body>
 </html>
