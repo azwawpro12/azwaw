@@ -164,10 +164,17 @@ function openModal(id) {
     p.related_procedures.forEach(procId => {
       const proc = procedures.find(pr => pr.id === procId);
       const procTitle = proc ? proc.title : "Procédure inconnue";
-      html += `
-        <button class="btn btn-primary" onclick="openProcedureModal('${procId}')">
-          <i class="fas fa-file-pdf"></i> ${procTitle}
-        </button>`;
+      if (proc && proc.file) {
+        html += `
+          <a href="${proc.file}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <i class="fas fa-file-pdf"></i> ${procTitle}
+          </a>`;
+      } else {
+        html += `
+          <span class="btn btn-primary" style="opacity:0.5;cursor:default;">
+            <i class="fas fa-file-pdf"></i> ${procTitle}
+          </span>`;
+      }
     });
 
     html += `
@@ -286,26 +293,15 @@ async function loadProcedures() {
 function openProcedureModal(id) {
   const p = procedures.find(p => p.id === id);
   if (!p) return;
-  
-  let html = `
-    <h3 style="margin-bottom:0.5rem;">${p.title}</h3>
-    <p class="modal-date" style="margin-bottom:1rem; font-size:0.9rem;">${p.date || ''}</p>`;
-  
   if (p.file) {
-    html += `
-      <div style="position:relative; height:85vh;">  <!-- Grand conteneur pour PDF -->
-        <iframe src="${p.file}" width="100%" height="100%" style="border:none; border-radius:8px;"></iframe>
-      </div>`;
-  } else {
-    html += `<p style="color:var(--accent-tertiary);">Aucun PDF disponible pour cette procédure.</p>`;
+    window.open(p.file, '_blank', 'noopener,noreferrer');
   }
-  
-  document.getElementById('modalContent').innerHTML = html;
-  document.getElementById('modal').classList.add('is-open');
 }
 function renderProcedures(procs) {
-  document.getElementById('proceduresGrid').innerHTML = procs.map(p => `
-    <div class="procedure-card card" onclick="openProcedureModal('${p.id}')">
+  document.getElementById('proceduresGrid').innerHTML = procs.map(p => {
+    const href = p.file ? `href="${p.file}" target="_blank" rel="noopener noreferrer"` : `href="#"`;
+    return `
+    <a class="procedure-card card" ${href} style="text-decoration:none;display:block;color:inherit;">
       ${p.vitrine ? `
         <div class="vitrine-container">
           <img src="${p.vitrine}" alt="${p.title}" class="procedure-vitrine">
@@ -318,8 +314,8 @@ function renderProcedures(procs) {
         <p class="card-date"><i class="fas fa-calendar-alt"></i> ${p.date}</p>
         <p>${p.description.substring(0, 120)}${p.description.length > 120 ? '...' : ''}</p>
       </div>
-    </div>
-  `).join('');
+    </a>`;
+  }).join('');
 }
 
 // Chargement Veilles
@@ -427,30 +423,14 @@ async function loadTCS() {
 }
 
 function openTCSModal() {
-  const modal = document.getElementById('modal');
-  const content = document.getElementById('modalContent');
-  if (!modal || !content) return;
-
-  content.innerHTML = `
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
-      <h3 style="margin:0; background:linear-gradient(135deg,#047857,#0E7490); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
-        Tableau de Synthèse E5
-      </h3>
-      <a href="fi/TCS.pdf" target="_blank" rel="noopener noreferrer" class="btn" style="font-size:0.85rem; padding:0.5rem 1.2rem; flex-shrink:0;">
-        <i class="fas fa-arrow-up-right-from-square"></i> Ouvrir
-      </a>
-    </div>
-    <div style="height:80vh; border-radius:12px; overflow:hidden; border:1px solid var(--border);">
-      <iframe src="fi/TCS.pdf" width="100%" height="100%" style="border:none; display:block;"></iframe>
-    </div>`;
-
-  modal.classList.add('is-open');
+  window.open('fi/TCS.pdf', '_blank', 'noopener,noreferrer');
 }
 // Fermeture Modal
 document.addEventListener('click', e => {
   const modal = document.getElementById('modal');
   if (e.target === modal || e.target.classList.contains('modal-close')) {
     modal.classList.remove('is-open');
+    modal.classList.remove('modal--pdf');
   }
 });
 

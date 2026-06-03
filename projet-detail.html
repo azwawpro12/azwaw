@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projet - Azwaw</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=21">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     .project-detail-hero {
-      padding: 2rem 0 60px;
-      background: linear-gradient(160deg, #F0FDF9 0%, #F8FAFC 100%);
+      padding: 4rem 0 4rem;
+      background: linear-gradient(145deg, #D8E3F5 0%, #EAF0FB 35%, #F5F6FF 65%, #E6EDF8 100%);
       border-bottom: 1px solid rgba(4,120,87,0.12);
       position: relative; overflow: hidden;
     }
@@ -18,7 +18,7 @@
       content: '';
       position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
       width: 700px; height: 500px;
-      background: radial-gradient(ellipse, rgba(4,120,87,0.07) 0%, transparent 65%);
+      background: radial-gradient(ellipse, rgba(0,0,0,0.04) 0%, transparent 65%);
       pointer-events: none;
     }
     .project-header { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; position: relative; z-index: 1; }
@@ -117,7 +117,7 @@
     .proc-linked-body p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.5; margin-bottom: 1rem; }
     .proc-open-btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: linear-gradient(135deg, #047857, #0E7490);
+      background: #080808;
       color: white; padding: 0.5rem 1.2rem;
       border-radius: 20px; font-size: 0.88rem; font-weight: 600;
       border: none; cursor: pointer;
@@ -135,7 +135,7 @@
     }
     .link-btn-github { background: rgba(15,23,42,0.04); color: var(--text-primary); border: 1px solid var(--border); }
     .link-btn-github:hover { background: rgba(15,23,42,0.08); transform: translateY(-2px); }
-    .link-btn-demo { background: linear-gradient(135deg, #047857, #0E7490); color: white; }
+    .link-btn-demo { background: #080808; color: white; }
     .link-btn-demo:hover { transform: translateY(-2px); border-color: rgba(49,112,142,0.3); }
     /* PDF Modal */
     #pdfModal {
@@ -151,10 +151,12 @@
     .pdf-modal-box {
       background: #FFFFFF;
       border: 1px solid rgba(4,120,87,0.2);
-      width: 95vw; max-width: 1100px; height: 95vh;
+      width: 92vw; max-width: 1300px; height: 92vh;
       border-radius: 20px; padding: 1.5rem;
       position: relative; display: flex; flex-direction: column;
       box-shadow: 0 24px 64px rgba(15,23,42,0.2);
+      resize: both; overflow: hidden;
+      min-width: 400px; min-height: 400px;
     }
     .pdf-modal-header {
       display: flex; justify-content: space-between;
@@ -175,16 +177,13 @@
       text-align: center; padding: 8rem 0;
       color: var(--text-secondary); font-size: 1rem;
     }
-    .loading-proj i { font-size: 2.5rem; margin-bottom: 1rem; display: block; animation: spin 1s linear infinite;
-      background: linear-gradient(135deg,#047857,#0E7490);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
+    .loading-proj i { font-size: 2.5rem; margin-bottom: 1rem; display: block; animation: spin 1s linear infinite; color: #080808; }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     /* Tags */
     .tags-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
     .tag-item {
-      background: rgba(4,120,87,0.1); color: #059669;
-      padding: 0.25rem 0.8rem; border-radius: 6px;
+      background: rgba(0,0,0,0.06); color: #080808;
+      padding: 0.25rem 0.8rem; border-radius: 999px;
       font-size: 0.78rem; font-weight: 600;
       border: 1px solid rgba(4,120,87,0.2);
     }
@@ -220,42 +219,13 @@
     </nav>
   </header>
 
-  <div class="page-banner">
-    <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
-    </svg>
-    <div class="page-banner-body">
-      <i class="fas fa-code pb-icon"></i>
-      <i class="fas fa-folder-open pb-icon"></i>
-      <i class="fas fa-wrench pb-icon"></i>
-      <i class="fas fa-laptop-code pb-icon"></i>
-      <i class="fas fa-server pb-icon"></i>
-      <i class="fas fa-terminal pb-icon"></i>
-      <h1 class="page-banner-title">Projet</h1>
-      <p class="page-banner-sub">Détail du projet</p>
-    </div>
-    <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
-    </svg>
-  </div>
-
-  <div id="pageContent">
+  <div id="pageContent" style="margin-top:68px;">
     <div class="loading-proj">
       <i class="fas fa-spinner"></i>
       Chargement du projet...
     </div>
   </div>
 
-  <!-- PDF Modal -->
-  <div id="pdfModal">
-    <div class="pdf-modal-box">
-      <div class="pdf-modal-header">
-        <h3 id="pdfModalTitle"></h3>
-        <button class="pdf-close-btn" onclick="closePdfModal()">×</button>
-      </div>
-      <iframe id="pdfIframe" src=""></iframe>
-    </div>
-  </div>
 
   <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
 
@@ -441,23 +411,10 @@
       document.getElementById('pageContent').innerHTML = html;
     }
 
-    function openPdf(file, title) {
+    function openPdf(file) {
       if (!file) return;
-      document.getElementById('pdfModalTitle').textContent = title || 'Document';
-      document.getElementById('pdfIframe').src = file;
-      document.getElementById('pdfModal').classList.add('is-open');
+      window.open(file, '_blank', 'noopener,noreferrer');
     }
-
-    function closePdfModal() {
-      document.getElementById('pdfModal').classList.remove('is-open');
-      document.getElementById('pdfIframe').src = '';
-    }
-
-    // Close on backdrop click
-    document.getElementById('pdfModal').addEventListener('click', function(e) {
-      if (e.target === this) closePdfModal();
-    });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePdfModal(); });
 
     function initScrollReveal() {
       const obs = new IntersectionObserver(entries => {

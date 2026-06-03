@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projets - Azwaw</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=21">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
 </head>
 <body>
   <header class="header">
@@ -19,7 +18,7 @@
         <li class="dropdown"><a href="projets.html" class="active">Projets <i class="fas fa-caret-down"></i></a>
           <ul class="submenu"><li><a href="projets.html">Tous</a></li><li><a href="projets.html?cat=personal">Personnels</a></li>
             <li><a href="projets.html?cat=school">École</a></li><li><a href="projets.html?cat=professional">Pro</a></li></ul></li>
-        <li><a href="Procédures.html">Procédures</a></li>    
+        <li><a href="Procédures.html">Procédures</a></li>
         <li><a href="veilles.html">Veilles</a></li>
         <li><a href="certifications.html">Certifications</a></li>
         <li><a href="index.html#contact">Contact</a></li>
@@ -30,43 +29,28 @@
     </nav>
   </header>
 
-  <div class="page-banner">
-    <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
-    </svg>
-    <div class="page-banner-body">
-      <i class="fas fa-code pb-icon"></i>
-      <i class="fas fa-folder-open pb-icon"></i>
-      <i class="fas fa-wrench pb-icon"></i>
-      <i class="fas fa-laptop-code pb-icon"></i>
-      <i class="fas fa-globe pb-icon"></i>
-      <i class="fas fa-terminal pb-icon"></i>
-      <h1 class="page-banner-title">Mes Projets</h1>
-      <p class="page-banner-sub">Infrastructure · Réseaux · Sécurité</p>
-    </div>
-    <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
-    </svg>
+  <div class="page-head">
+    <span class="eyebrow">RÉALISATIONS</span>
+    <h1 class="page-head-title">Mes Projets</h1>
+    <p class="page-head-sub">Infrastructure · Réseaux · Sécurité</p>
   </div>
 
-  <main style="padding: 2rem 0 5rem;" class="has-page-banner">
+  <main class="page-main">
     <div class="container">
       <div class="filters-container">
-  <select id="projectFilter" class="project-dropdown">
-    <option value="all">Tous les projets</option>
-    <option value="personal">Projets Personnels</option>
-    <option value="school">TP École</option>
-    <option value="professional">Projets Professionnels</option>
-  </select>
-</div>
-
-<div class="projects-grid" id="projectsGrid"></div>
+        <select id="projectFilter" class="project-dropdown">
+          <option value="all">Tous les projets</option>
+          <option value="personal">Projets Personnels</option>
+          <option value="school">TP École</option>
+          <option value="professional">Projets Professionnels</option>
+        </select>
+      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
     </div>
   </main>
 
   <div id="modal" class="modal"><div class="modal-container"><button class="modal-close">×</button><div id="modalContent"></div></div></div>
   <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
-
   <script src="scripts.js?v=13"></script>
 </body>
 </html>

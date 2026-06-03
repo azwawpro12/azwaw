@@ -3,159 +3,265 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Azwaw</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <title>Portfolio · Azwaw</title>
+  <link rel="stylesheet" href="style.css?v=21">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* ── Layout hero ── */
-    .hero-section {
+
+    /* ─── HERO : fond dégradé + carte blanche flottante ─────── */
+    .hero {
       min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 6rem 0 3rem;
-      position: relative; overflow: hidden;
+      padding-top: 68px;
+      background: linear-gradient(120deg,
+        #dce8e5 0%, #c8dbd8 25%,
+        #d4e4e8 55%, #e0ecf0 80%,
+        #e8e0d4 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* ── Partie haute : greeting + nom ── */
-    .hero-top {
-      padding: 0 1.5rem 1.5rem;
-      position: relative; z-index: 2; width: 100%;
-    }
-    .hero-greeting {
-      font-size: 1.05rem; font-style: italic; font-weight: 300;
-      color: var(--text-muted);
-      margin: 0 0 0.4rem; letter-spacing: 0.04em;
-    }
-    .hero-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      font-weight: 800; letter-spacing: -0.035em; line-height: 1;
-      margin: 0;
-      background: linear-gradient(135deg, #1E293B 0%, #047857 55%, #0E7490 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* Cercle lumineux décoratif (imite la lumière du soleil du template) */
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -5%;
+      top: 10%;
+      width: 55%;
+      height: 90%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center,
+        rgba(255,220,160,0.35) 0%,
+        rgba(255,200,120,0.15) 40%,
+        transparent 70%);
+      pointer-events: none;
     }
 
-    /* ── Bande ondulée ── */
-    .hero-wave-wrap { width: 100%; position: relative; z-index: 1; }
-    .hero-wave-wrap svg { display: block; width: 100%; height: 65px; }
-
-    .hero-wave-body {
-      background: #047857;
-      padding: 1.75rem 2rem 2rem;
-      position: relative; overflow: hidden;
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
-    /* Icônes décoratives dans la vague */
-    .wv-icon {
-      position: absolute; color: rgba(255,255,255,0.1);
-      pointer-events: none; user-select: none;
+    /* Carte blanche flottante — signature du template */
+    .hero-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 3.5rem 3rem;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
     }
-    .wv-icon:nth-child(1) { font-size: 2.8rem; top: 10px;  left: 5%; }
-    .wv-icon:nth-child(2) { font-size: 1.8rem; top: 14px;  left: 18%; }
-    .wv-icon:nth-child(3) { font-size: 2.2rem; bottom: 12px; left: 10%; }
-    .wv-icon:nth-child(4) { font-size: 3rem;   top: 8px;   right: 6%; }
-    .wv-icon:nth-child(5) { font-size: 1.6rem; bottom: 10px; right: 14%; }
-    .wv-icon:nth-child(6) { font-size: 2rem;   top: 50%; right: 28%; transform: translateY(-50%); }
 
-    /* Contenu dans la vague */
-    .hero-role {
-      font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72);
-      margin: 0 0 1.25rem; position: relative; z-index: 1;
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #2E7D6E;
+      margin-bottom: 1rem;
+      display: block;
     }
-    .hero-chips {
-      display: flex; justify-content: center; gap: 0.6rem;
-      flex-wrap: wrap; margin-bottom: 1rem;
-      position: relative; z-index: 1;
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: #1D2B2A;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
     }
-    .hero-chip {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.35rem 1rem; border-radius: 20px;
-      font-size: 0.82rem; font-weight: 600;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.35);
+
+    .hero-desc {
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: #4B5E5C;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #1D5C4E;
       color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 6px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.22s, transform 0.22s;
     }
-    .hero-location {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.8rem; color: rgba(255,255,255,0.6);
-      position: relative; z-index: 1;
+    .hero-btn:hover { background: #164840; transform: translateY(-2px); }
+
+    .hero-avail {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.875rem;
+      color: #6B7B79;
+    }
+    .hero-avail-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%; background: #22C55E;
     }
 
-    /* ── Partie basse : badge + socials + CTA ── */
-    .hero-bottom {
-      padding: 2rem 1.5rem 0;
-      position: relative; z-index: 2; width: 100%;
+    /* ─── SECTION : tagline centré + grand titre serif ──────── */
+    .about-intro {
+      background: #FFFFFF;
+      padding: 6rem 2rem;
+      text-align: center;
     }
-    .hero-status {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.4rem 1.2rem; border-radius: 20px;
-      font-size: 0.8rem; font-weight: 600;
-      background: #fff;
-      border: 1px solid rgba(4,120,87,0.2);
-      color: #047857;
-      box-shadow: 0 4px 16px rgba(4,120,87,0.12);
-      margin-bottom: 1.5rem;
+    .about-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #2E7D6E;
+      margin-bottom: 1rem;
+      display: block;
     }
-    .hero-status-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #34D399;
-      animation: pulse-dot 2s infinite;
+    .about-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: #1D2B2A;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      max-width: 780px;
+      margin: 0 auto 1.5rem;
     }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    .about-desc {
+      font-family: 'Lato', sans-serif;
+      font-size: 1.05rem;
+      color: #4B5E5C;
+      line-height: 1.8;
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
     }
-    .hero-socials {
-      display: flex; justify-content: center; gap: 0.75rem;
-      margin-bottom: 1.5rem;
+    .about-chips {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
     }
-    .hero-social-link {
-      width: 40px; height: 40px; border-radius: 10px;
+    .about-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      border: 1px solid #B2CECA;
+      color: #1D5C4E;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.875rem; font-weight: 700;
+      background: rgba(29,92,78,0.05);
+    }
+
+    /* ─── SECTION : 3 domaines (fond clair) ────────────────── */
+    .domains-section {
+      background: #F2F7F6;
+      padding: 5rem 2rem;
+    }
+    .domains-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .domains-head {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .domains-head .about-tagline { margin-bottom: 0.75rem; }
+    .domains-head .about-title { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+
+    .domains-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .domain-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border: 1px solid #D4E4E0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .domain-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,0.09); }
+    .domain-icon {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: #E8F2F0;
+      color: #1D5C4E;
       display: flex; align-items: center; justify-content: center;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      font-size: 0.95rem; text-decoration: none;
-      transition: color 0.2s, border-color 0.2s, transform 0.2s;
+      font-size: 1.4rem;
+      margin: 0 auto 1.25rem;
     }
-    .hero-social-link:hover {
-      color: #047857; border-color: rgba(4,120,87,0.35);
-      transform: translateY(-2px);
+    .domain-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: #1D2B2A; margin-bottom: 0.75rem;
     }
-    .hero-cta { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.75rem 1.75rem; border-radius: 12px;
-      font-size: 0.9rem; font-weight: 600;
-      color: var(--text-primary);
-      border: 1px solid rgba(15,23,42,0.12);
-      background: rgba(15,23,42,0.03); text-decoration: none;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    .domain-desc {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem; color: #6B7B79; line-height: 1.65;
     }
-    .btn-outline:hover {
-      border-color: rgba(4,120,87,0.4);
-      background: rgba(4,120,87,0.08);
-      transform: translateY(-2px);
+
+    /* ─── CONTACT ─────────────────────────────────────────── */
+    .contact-section {
+      background: #FFFFFF;
+      padding: 5rem 2rem;
+    }
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-head-tag { font-family:'Playfair Display',serif; font-style:italic; font-size:1rem; color:#2E7D6E; display:block; margin-bottom:0.6rem; }
+    .contact-head-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:#1D2B2A; letter-spacing:-0.01em; margin-bottom:0.75rem; }
+    .contact-head-desc { font-family:'Lato',sans-serif; font-size:0.95rem; color:#4B5E5C; line-height:1.7; margin-bottom:2rem; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-card { max-width: 100%; }
+      .domains-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     }
     @media (max-width: 600px) {
-      .hero-wave-wrap svg { height: 40px; }
-      .hero-cta { flex-direction: column; align-items: center; }
-      .hero-cta a { width: 100%; justify-content: center; }
+      .hero-card { padding: 2.5rem 1.75rem; }
+      .about-intro { padding: 4rem 1.5rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER ───────────────────────────────────────────────── -->
   <header class="header">
     <nav class="nav-container">
-      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
+      <div class="logo">
+        <a href="index.html">
+          <span class="logo-icon"><i class="fas fa-user-tie"></i></span>
+          <span class="logo-text">Azwaw</span>
+        </a>
+      </div>
       <ul class="nav-menu">
         <li><a href="index.html" class="active">Accueil</a></li>
         <li><a href="about.html">À propos</a></li>
         <li><a href="competences.html">TCS</a></li>
-        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+        <li class="dropdown">
+          <a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
           <ul class="submenu">
             <li><a href="projets.html">Tous</a></li>
             <li><a href="projets.html?cat=personal">Personnels</a></li>
@@ -169,108 +275,95 @@
         <li><a href="#contact">Contact</a></li>
         <li><a href="cv.html">CV</a></li>
       </ul>
-      <button id="themeToggle" class="theme-toggle" aria-label="Basculer le thème"><i class="fas fa-sun"></i></button>
-      <button class="mobile-menu-toggle" id="mobileToggle" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
     </nav>
   </header>
 
-  <section class="hero-section">
+  <!-- HERO ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-card">
+        <span class="hero-tagline">Étudiant BTS SIO &nbsp;·&nbsp; Option SISR</span>
 
-    <!-- Au-dessus de la vague -->
-    <div class="hero-top">
-      <p class="hero-greeting">Bonjour, je suis</p>
-      <h1 class="hero-name">Azwaw</h1>
-    </div>
+        <h1 class="hero-title">Bonjour,<br>je suis Azwaw</h1>
 
-    <!-- Bande verte ondulée -->
-    <div class="hero-wave-wrap">
-      <svg viewBox="0 0 1440 65" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,50 Q360,0 720,50 Q1080,100 1440,50 L1440,65 L0,65 Z" fill="#047857"/>
-      </svg>
-      <div class="hero-wave-body">
-        <i class="fas fa-shield-halved wv-icon"></i>
-        <i class="fas fa-network-wired wv-icon"></i>
-        <i class="fas fa-server wv-icon"></i>
-        <i class="fas fa-terminal wv-icon"></i>
-        <i class="fas fa-lock wv-icon"></i>
-        <i class="fas fa-database wv-icon"></i>
-        <p class="hero-role">Étudiant BTS SIO &mdash; Option SISR</p>
-        <div class="hero-chips">
-          <span class="hero-chip"><i class="fas fa-network-wired"></i> Réseau</span>
-          <span class="hero-chip"><i class="fas fa-server"></i> Systèmes</span>
-          <span class="hero-chip"><i class="fas fa-shield-halved"></i> Sécurité</span>
+        <p class="hero-desc">
+          Passionné par les réseaux, les systèmes et la cybersécurité.<br>
+          Étudiant BTS SIO SISR à l'IFC de Marseille.
+        </p>
+
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.75rem;">
+          <span class="about-chip"><i class="fas fa-network-wired"></i> Réseaux</span>
+          <span class="about-chip"><i class="fas fa-shield-halved"></i> Sécurité</span>
+          <span class="about-chip"><i class="fas fa-server"></i> Systèmes</span>
         </div>
-        <div class="hero-location"><i class="fas fa-map-marker-alt"></i> Marseille, France</div>
-      </div>
-      <svg viewBox="0 0 1440 65" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,0 L1440,0 L1440,15 Q1080,65 720,15 Q360,-35 0,15 Z" fill="#047857"/>
-      </svg>
-    </div>
 
-    <!-- En-dessous de la vague -->
-    <div class="hero-bottom">
-      <div class="hero-status">
-        <span class="hero-status-dot"></span>
-        Disponible pour alternance / stage
-      </div>
-      <div class="hero-socials">
-        <a href="https://github.com/azwaw7" class="hero-social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="#" class="hero-social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <div class="hero-cta">
-        <a href="about.html" class="btn">Découvrir mon parcours <i class="fas fa-arrow-right"></i></a>
-        <a href="#contact" class="btn-outline"><i class="fas fa-envelope"></i> Me contacter</a>
+        <a href="projets.html" class="hero-btn">
+          Découvrir mes projets &nbsp;<i class="fas fa-arrow-right"></i>
+        </a>
+
+        <div class="hero-avail">
+          <span class="hero-avail-dot"></span>
+          Disponible pour alternance ou stage
+        </div>
       </div>
     </div>
-
   </section>
 
-  <section id="contact" class="contact-section">
+  <!-- CONTACT ──────────────────────────────────────────────── -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div>
+        <span class="contact-head-tag">Travaillons ensemble</span>
+        <h2 class="contact-head-title">Envoyez-moi un message</h2>
+        <p class="contact-head-desc">Disponible pour une alternance ou un stage en infrastructure et sécurité. N'hésitez pas à me contacter.</p>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-details">
+            <span class="contact-label">Email</span>
+            <a href="mailto:azwawpro@gmail.com">azwawpro@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-details">
+            <span class="contact-label">Localisation</span>
+            <span>Marseille, France</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="contact-details">
+            <span class="contact-label">Formation</span>
+            <span>BTS SIO option SISR</span>
+          </div>
+        </div>
+        <a href="cv.html" class="btn" style="margin-top:1.5rem; display:inline-flex;">Voir mon CV</a>
+      </div>
+
+      <form id="contactForm" class="contact-form card" style="border-radius:14px;">
+        <label for="contact-name" class="sr-only">Nom</label>
+        <input id="contact-name" type="text" name="name" placeholder="Votre nom" required>
+        <label for="contact-email" class="sr-only">Email</label>
+        <input id="contact-email" type="email" name="email" placeholder="Votre email" required>
+        <label for="contact-subject" class="sr-only">Sujet</label>
+        <input id="contact-subject" type="text" name="subject" placeholder="Sujet" required>
+        <label for="contact-message" class="sr-only">Message</label>
+        <textarea id="contact-message" name="message" placeholder="Votre message" rows="5" required></textarea>
+        <button type="submit" class="btn" style="width:100%;justify-content:center;">
+          Envoyer <i class="fas fa-paper-plane"></i>
+        </button>
+        <p id="status" style="margin-top:0.75rem;font-size:0.875rem;text-align:center;color:#4B5E5C;"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
     <div class="container">
-      <h2 class="section-title">Contact</h2>
-      <p class="section-subtitle">Envoyez-moi un message</p>
-      <div class="contact-content">
-        <form id="contactForm" class="contact-form card">
-          <label for="contact-name" class="sr-only">Votre nom</label>
-          <input id="contact-name" type="text" name="name" placeholder="Votre nom" required>
-          <label for="contact-email" class="sr-only">Votre email</label>
-          <input id="contact-email" type="email" name="email" placeholder="Votre email" required>
-          <label for="contact-subject" class="sr-only">Sujet</label>
-          <input id="contact-subject" type="text" name="subject" placeholder="Sujet" required>
-          <label for="contact-message" class="sr-only">Votre message</label>
-          <textarea id="contact-message" name="message" placeholder="Votre message" rows="5" required></textarea>
-          <button type="submit" class="btn">Envoyer</button>
-          <p id="status"></p>
-        </form>
-        <div class="contact-info card">
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <div class="contact-details">
-              <span class="contact-label">Email</span>
-              <a href="mailto:azwawpro@gmail.com">azwawpro@gmail.com</a>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="contact-details">
-              <span class="contact-label">Localisation</span>
-              <span>Marseille, France</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-graduation-cap"></i></div>
-            <div class="contact-details">
-              <span class="contact-label">Formation</span>
-              <span>BTS SIO option SISR</span>
-            </div>
-          </div>
-          <a href="cv.html" class="btn btn-secondary">Voir mon CV</a>
-        </div>
-      </div>
+      <p>© <span id="currentYear"></span> Azwaw &nbsp;·&nbsp; BTS SIO SISR &nbsp;·&nbsp; Marseille</p>
     </div>
-  </section>
-
-  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+  </footer>
 
   <div id="modal" class="modal"><div class="modal-container"><button class="modal-close">×</button><div id="modalContent"></div></div></div>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>

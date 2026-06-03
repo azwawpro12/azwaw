@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veille - Azwaw</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=21">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .detail-hero {
@@ -30,7 +30,7 @@
       padding: 0.35rem 1rem; border-radius: 20px;
       margin-bottom: 1.5rem;
     }
-    .badge-tech { background: rgba(14,116,144,0.15); color: #0E7490; border: 1px solid rgba(14,116,144,0.25); }
+    .badge-tech { background: rgba(0,0,0,0.07); color: #080808; border: 1px solid rgba(0,0,0,0.12); }
     .badge-juridique { background: rgba(217,119,6,0.15); color: #D97706; border: 1px solid rgba(217,119,6,0.25); }
 
     .detail-title {
@@ -103,7 +103,7 @@
       cursor: pointer;
     }
     .detail-link-btn.tech-btn {
-      background: linear-gradient(135deg, #047857, #0E7490);
+      background: #080808;
       color: #fff;
       box-shadow: 0 4px 20px rgba(14,116,144,0.3);
     }
@@ -180,26 +180,13 @@
     </nav>
   </header>
 
-  <div class="page-banner">
-    <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
-    </svg>
-    <div class="page-banner-body">
-      <i class="fas fa-newspaper pb-icon"></i>
-      <i class="fas fa-rss pb-icon"></i>
-      <i class="fas fa-magnifying-glass pb-icon"></i>
-      <i class="fas fa-eye pb-icon"></i>
-      <i class="fas fa-bell pb-icon"></i>
-      <i class="fas fa-globe pb-icon"></i>
-      <h1 class="page-banner-title">Veille</h1>
-      <p class="page-banner-sub">Technologie & Juridique</p>
-    </div>
-    <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
-    </svg>
+  <div class="page-head">
+    <span class="eyebrow">VEILLE</span>
+    <h1 class="page-head-title">Article</h1>
+    <p class="page-head-sub">Veille technologique &amp; juridique</p>
   </div>
 
-  <main style="padding: 2rem 0 5rem;" class="has-page-banner">
+  <main class="page-main">
     <div class="container">
 
       <div id="loadingState"><i class="fas fa-circle-notch fa-spin" style="margin-right:0.5rem;"></i> Chargement…</div>
