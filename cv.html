@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CV - Azwaw</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=21">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
 </head>
@@ -37,7 +37,7 @@
 
   <div class="page-banner">
     <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
+      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#1D5C4E"/>
     </svg>
     <div class="page-banner-body">
       <i class="fas fa-file-pdf pb-icon"></i>
@@ -50,31 +50,18 @@
       <p class="page-banner-sub">Visualisez ou téléchargez mon curriculum vitae</p>
     </div>
     <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
+      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#1D5C4E"/>
     </svg>
   </div>
 
-  <main style="padding: 2rem 0 5rem;" class="has-page-banner">
-    <div class="container">
-
-      <!-- Bouton Télécharger avec flèche ↓ -->
-      <div style="text-align:center; margin-bottom:2rem;">
-        <a href="fi/cv.pdf" download class="btn" style="font-size:1.5rem;">
-          <i class="fas fa-download"></i> Télécharger le CV
-        </a>
-      </div>
-
-      <!-- Embed PDF Responsive -->
-      <div class="pdf-container card">
-        <iframe src="fi/cv.pdf" 
-                width="100%" 
-                height="800px" 
-                style="border:none;">
-          <p>Votre navigateur ne supporte pas l'affichage PDF. 
-             <a href="fi/cv.pdf">Cliquez ici pour télécharger</a>.
-          </p>
-        </iframe>
-      </div>
+  <main style="padding: 4rem 0 6rem;" class="has-page-banner">
+    <div class="container" style="display:flex; flex-direction:column; align-items:center; gap:1.25rem; max-width:520px;">
+      <a href="fi/cv.pdf" target="_blank" rel="noopener" class="btn" style="width:100%; justify-content:center; font-size:1rem; padding:1rem 2rem;">
+        <i class="fas fa-eye"></i> Ouvrir le CV
+      </a>
+      <a href="fi/cv.pdf" download class="btn-outline" style="width:100%; justify-content:center; font-size:1rem; padding:1rem 2rem;">
+        <i class="fas fa-download"></i> Télécharger le CV
+      </a>
     </div>
   </main>
 

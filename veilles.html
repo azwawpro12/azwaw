@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Veilles - Azwaw</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=21">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* ── Catégories ── */
@@ -40,9 +40,9 @@
     .cat-card:hover::before { opacity: 1; }
 
     /* Tech — indigo/sky */
-    .cat-tech { border-color: rgba(14,116,144,0.2); }
-    .cat-tech::before { background: radial-gradient(ellipse at 50% 0%, rgba(14,116,144,0.12), transparent 70%); }
-    .cat-tech:hover { border-color: rgba(14,116,144,0.45); box-shadow: 0 20px 48px rgba(15,23,42,0.12), 0 0 0 1px rgba(14,116,144,0.2); }
+    .cat-tech { border-color: rgba(29,92,78,0.2); }
+    .cat-tech::before { background: radial-gradient(ellipse at 50% 0%, rgba(29,92,78,0.12), transparent 70%); }
+    .cat-tech:hover { border-color: rgba(29,92,78,0.45); box-shadow: 0 20px 48px rgba(15,23,42,0.12), 0 0 0 1px rgba(29,92,78,0.2); }
 
     /* Juridique — purple/pink */
     .cat-juridique { border-color: rgba(217,119,6,0.2); }
@@ -54,7 +54,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 2rem; margin: 0 auto 1.5rem;
     }
-    .cat-tech .cat-icon { background: linear-gradient(135deg, rgba(14,116,144,0.2), rgba(14,116,144,0.2)); color: #0E7490; border: 1px solid rgba(14,116,144,0.25); }
+    .cat-tech .cat-icon { background: linear-gradient(135deg, rgba(29,92,78,0.2), rgba(29,92,78,0.2)); color: #1D5C4E; border: 1px solid rgba(29,92,78,0.25); }
     .cat-juridique .cat-icon { background: linear-gradient(135deg, rgba(217,119,6,0.2), rgba(245,158,11,0.2)); color: #D97706; border: 1px solid rgba(217,119,6,0.25); }
 
     .cat-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--text-primary); }
@@ -65,7 +65,7 @@
       font-size: 0.8rem; font-weight: 600;
       padding: 0.3rem 0.9rem; border-radius: 20px;
     }
-    .cat-tech .cat-count { background: rgba(14,116,144,0.15); color: #0E7490; border: 1px solid rgba(14,116,144,0.2); }
+    .cat-tech .cat-count { background: rgba(29,92,78,0.15); color: #1D5C4E; border: 1px solid rgba(29,92,78,0.2); }
     .cat-juridique .cat-count { background: rgba(217,119,6,0.15); color: #D97706; border: 1px solid rgba(217,119,6,0.2); }
 
     .cat-arrow {
@@ -87,7 +87,7 @@
       font-size: 0.8rem; font-weight: 600;
       padding: 0.3rem 1rem; border-radius: 20px;
     }
-    .badge-tech { background: rgba(14,116,144,0.15); color: #0E7490; border: 1px solid rgba(14,116,144,0.2); }
+    .badge-tech { background: rgba(29,92,78,0.15); color: #1D5C4E; border: 1px solid rgba(29,92,78,0.2); }
     .badge-juridique { background: rgba(217,119,6,0.15); color: #D97706; border: 1px solid rgba(217,119,6,0.2); }
 
     .veilles-grid {
@@ -113,10 +113,10 @@
       transform: scaleX(0); transform-origin: left;
       transition: transform 0.3s ease;
     }
-    .veille-card.v-tech::after { background: linear-gradient(90deg, #047857, #0E7490); }
+    .veille-card.v-tech::after { background: linear-gradient(90deg, #1D5C4E, #164840); }
     .veille-card.v-juridique::after { background: linear-gradient(90deg, #D97706, #F59E0B); }
     .veille-card:hover { transform: translateY(-5px); }
-    .veille-card.v-tech:hover { border-color: rgba(14,116,144,0.35); box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(14,116,144,0.1); }
+    .veille-card.v-tech:hover { border-color: rgba(29,92,78,0.35); box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(29,92,78,0.1); }
     .veille-card.v-juridique:hover { border-color: rgba(217,119,6,0.35); box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(217,119,6,0.1); }
     .veille-card:hover::after { transform: scaleX(1); }
 
@@ -131,7 +131,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 3rem; border-bottom: 1px solid var(--border);
     }
-    .v-tech .veille-thumb-placeholder { background: rgba(14,116,144,0.08); color: #0E7490; }
+    .v-tech .veille-thumb-placeholder { background: rgba(29,92,78,0.08); color: #1D5C4E; }
     .v-juridique .veille-thumb-placeholder { background: rgba(217,119,6,0.08); color: #D97706; }
 
     .veille-body { padding: 1.4rem; }
@@ -145,7 +145,7 @@
       margin-top: 1rem;
       transition: gap 0.2s;
     }
-    .v-tech .veille-read-more { color: #0E7490; }
+    .v-tech .veille-read-more { color: #1D5C4E; }
     .v-juridique .veille-read-more { color: #D97706; }
     .veille-card:hover .veille-read-more { gap: 0.7rem; }
 
@@ -181,7 +181,7 @@
 
   <div class="page-banner">
     <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
+      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#1D5C4E"/>
     </svg>
     <div class="page-banner-body">
       <i class="fas fa-newspaper pb-icon"></i>
@@ -194,7 +194,7 @@
       <p class="page-banner-sub">Technologie & Juridique</p>
     </div>
     <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
+      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#1D5C4E"/>
     </svg>
   </div>
 
@@ -341,3 +341,4 @@
   </script>
 </body>
 </html>
+

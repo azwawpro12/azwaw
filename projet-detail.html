@@ -1,54 +1,54 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projet - Azwaw</title>
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=21">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     .project-detail-hero {
       padding: 2rem 0 60px;
-      background: linear-gradient(160deg, #F0FDF9 0%, #F8FAFC 100%);
-      border-bottom: 1px solid rgba(4,120,87,0.12);
+      background: linear-gradient(160deg, #F0FDF9 0%, #F9FAFB 100%);
+      border-bottom: 1px solid rgba(29,92,78,0.12);
       position: relative; overflow: hidden;
     }
     .project-detail-hero::before {
       content: '';
       position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
       width: 700px; height: 500px;
-      background: radial-gradient(ellipse, rgba(4,120,87,0.07) 0%, transparent 65%);
+      background: radial-gradient(ellipse, rgba(29,92,78,0.07) 0%, transparent 65%);
       pointer-events: none;
     }
     .project-header { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; position: relative; z-index: 1; }
     @media (max-width: 768px) { .project-header { grid-template-columns: 1fr; } }
-    .project-title-area h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 0.8rem; line-height: 1.1; }
+    .project-title-area h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 0.8rem; line-height: 1.1; }
     .project-meta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin: 1rem 0; }
     .project-badge {
-      background: rgba(4,120,87,0.12);
+      background: rgba(29,92,78,0.12);
       color: var(--accent-light);
       padding: 0.3rem 0.9rem;
       border-radius: 20px;
       font-size: 0.82rem;
       font-weight: 600;
-      border: 1px solid rgba(4,120,87,0.2);
+      border: 1px solid rgba(29,92,78,0.2);
     }
     .project-date-badge {
-      background: rgba(14,116,144,0.1);
+      background: rgba(29,92,78,0.1);
       color: var(--accent-secondary);
       padding: 0.3rem 0.9rem;
       border-radius: 20px;
       font-size: 0.82rem;
-      border: 1px solid rgba(14,116,144,0.18);
+      border: 1px solid rgba(29,92,78,0.18);
     }
     .project-vitrine-hero {
       width: 100%;
       max-height: 340px;
       object-fit: contain;
       border-radius: 16px;
-      box-shadow: 0 16px 48px rgba(15,23,42,0.12);
-      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: 0 16px 48px rgba(17,24,39,0.12);
+      border: 1px solid rgba(17,24,39,0.08);
     }
     /* Sections */
     .detail-section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
@@ -56,7 +56,7 @@
     .detail-section h2 { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
     .detail-section h2 i { color: var(--accent-primary); }
     .description-block {
-      background: rgba(4,120,87,0.06);
+      background: rgba(29,92,78,0.06);
       border-left: 3px solid var(--accent-primary);
       padding: 1.5rem 1.8rem;
       border-radius: 0 12px 12px 0;
@@ -69,7 +69,7 @@
     /* Schema */
     .schema-container {
       text-align: center;
-      background: rgba(15,23,42,0.02);
+      background: rgba(17,24,39,0.02);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 2rem;
@@ -81,7 +81,7 @@
       border-radius: 12px;
       cursor: pointer;
       transition: transform 0.3s ease;
-      box-shadow: 0 8px 32px rgba(15,23,42,0.1);
+      box-shadow: 0 8px 32px rgba(17,24,39,0.1);
     }
     .schema-img:hover { transform: scale(1.03); }
     /* Procedures liées */
@@ -100,8 +100,8 @@
     }
     .proc-linked-card:hover {
       transform: translateY(-5px);
-      border-color: rgba(4,120,87,0.35);
-      box-shadow: 0 12px 32px rgba(15,23,42,0.12), 0 0 0 1px rgba(4,120,87,0.15);
+      border-color: rgba(29,92,78,0.35);
+      box-shadow: 0 12px 32px rgba(17,24,39,0.12), 0 0 0 1px rgba(29,92,78,0.15);
     }
     .proc-linked-vitrine {
       width: 100%;
@@ -109,7 +109,7 @@
       object-fit: contain;
       object-position: center;
       padding: 12px;
-      background: rgba(15,23,42,0.02);
+      background: rgba(17,24,39,0.02);
       box-sizing: border-box;
     }
     .proc-linked-body { padding: 1.2rem; }
@@ -117,7 +117,7 @@
     .proc-linked-body p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.5; margin-bottom: 1rem; }
     .proc-open-btn {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: linear-gradient(135deg, #047857, #0E7490);
+      background: linear-gradient(135deg, #1D5C4E, #164840);
       color: white; padding: 0.5rem 1.2rem;
       border-radius: 20px; font-size: 0.88rem; font-weight: 600;
       border: none; cursor: pointer;
@@ -133,16 +133,16 @@
       font-weight: 600; font-size: 0.9rem;
       text-decoration: none; transition: all 0.2s ease;
     }
-    .link-btn-github { background: rgba(15,23,42,0.04); color: var(--text-primary); border: 1px solid var(--border); }
-    .link-btn-github:hover { background: rgba(15,23,42,0.08); transform: translateY(-2px); }
-    .link-btn-demo { background: linear-gradient(135deg, #047857, #0E7490); color: white; }
+    .link-btn-github { background: rgba(17,24,39,0.04); color: var(--text-primary); border: 1px solid var(--border); }
+    .link-btn-github:hover { background: rgba(17,24,39,0.08); transform: translateY(-2px); }
+    .link-btn-demo { background: linear-gradient(135deg, #1D5C4E, #164840); color: white; }
     .link-btn-demo:hover { transform: translateY(-2px); border-color: rgba(49,112,142,0.3); }
     /* PDF Modal */
     #pdfModal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(15,23,42,0.6);
+      background: rgba(17,24,39,0.6);
       z-index: 9999;
       align-items: center;
       justify-content: center;
@@ -150,11 +150,11 @@
     #pdfModal.is-open { display: flex; }
     .pdf-modal-box {
       background: #FFFFFF;
-      border: 1px solid rgba(4,120,87,0.2);
+      border: 1px solid rgba(29,92,78,0.2);
       width: 95vw; max-width: 1100px; height: 95vh;
       border-radius: 20px; padding: 1.5rem;
       position: relative; display: flex; flex-direction: column;
-      box-shadow: 0 24px 64px rgba(15,23,42,0.2);
+      box-shadow: 0 24px 64px rgba(17,24,39,0.2);
     }
     .pdf-modal-header {
       display: flex; justify-content: space-between;
@@ -162,7 +162,7 @@
     }
     .pdf-modal-header h3 { color: var(--text-primary); font-size: 1.1rem; font-weight: 600; }
     .pdf-close-btn {
-      background: rgba(15,23,42,0.04); border: 1px solid var(--border);
+      background: rgba(17,24,39,0.04); border: 1px solid var(--border);
       border-radius: 8px; width: 36px; height: 36px;
       font-size: 1.2rem; color: var(--text-secondary); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
@@ -176,17 +176,17 @@
       color: var(--text-secondary); font-size: 1rem;
     }
     .loading-proj i { font-size: 2.5rem; margin-bottom: 1rem; display: block; animation: spin 1s linear infinite;
-      background: linear-gradient(135deg,#047857,#0E7490);
+      background: linear-gradient(135deg,#1D5C4E,#164840);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     /* Tags */
     .tags-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
     .tag-item {
-      background: rgba(4,120,87,0.1); color: #059669;
+      background: rgba(29,92,78,0.1); color: #1D5C4E;
       padding: 0.25rem 0.8rem; border-radius: 6px;
       font-size: 0.78rem; font-weight: 600;
-      border: 1px solid rgba(4,120,87,0.2);
+      border: 1px solid rgba(29,92,78,0.2);
     }
     /* Scroll reveal */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -222,7 +222,7 @@
 
   <div class="page-banner">
     <svg class="page-banner-wave-top" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#047857"/>
+      <path d="M0,35 Q360,0 720,35 Q1080,70 1440,35 L1440,50 L0,50 Z" fill="#1D5C4E"/>
     </svg>
     <div class="page-banner-body">
       <i class="fas fa-code pb-icon"></i>
@@ -235,7 +235,7 @@
       <p class="page-banner-sub">Détail du projet</p>
     </div>
     <svg class="page-banner-wave-bot" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#047857"/>
+      <path d="M0,0 L1440,0 L1440,15 Q1080,50 720,15 Q360,-20 0,15 Z" fill="#1D5C4E"/>
     </svg>
   </div>
 
@@ -246,18 +246,7 @@
     </div>
   </div>
 
-  <!-- PDF Modal -->
-  <div id="pdfModal">
-    <div class="pdf-modal-box">
-      <div class="pdf-modal-header">
-        <h3 id="pdfModalTitle"></h3>
-        <button class="pdf-close-btn" onclick="closePdfModal()">×</button>
-      </div>
-      <iframe id="pdfIframe" src=""></iframe>
-    </div>
-  </div>
-
-  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+<footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
 
   <script>
     // Dark mode
@@ -414,7 +403,7 @@
             </p>
             <div class="procedures-linked-grid">
               ${linkedProcs.map(proc => `
-                <div class="proc-linked-card" onclick="openPdf('${proc.file}', '${proc.title}')">
+                <div class="proc-linked-card" onclick="openPdf('${proc.file}')">
                   ${proc.vitrine ? `
                     <img src="${proc.vitrine}" alt="${proc.title}" class="proc-linked-vitrine">
                   ` : `
@@ -426,7 +415,7 @@
                     <h4>${proc.title}</h4>
                     ${proc.date ? `<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-calendar"></i> ${proc.date}</p>` : ''}
                     <p>${proc.description.substring(0, 100)}${proc.description.length > 100 ? '...' : ''}</p>
-                    <button class="proc-open-btn" onclick="event.stopPropagation(); openPdf('${proc.file}', '${proc.title}')">
+                    <button class="proc-open-btn" onclick="event.stopPropagation(); openPdf('${proc.file}')">
                       <i class="fas fa-file-pdf"></i> Ouvrir le PDF
                     </button>
                   </div>
@@ -441,23 +430,10 @@
       document.getElementById('pageContent').innerHTML = html;
     }
 
-    function openPdf(file, title) {
+    function openPdf(file) {
       if (!file) return;
-      document.getElementById('pdfModalTitle').textContent = title || 'Document';
-      document.getElementById('pdfIframe').src = file;
-      document.getElementById('pdfModal').classList.add('is-open');
+      window.open(file, '_blank', 'noopener');
     }
-
-    function closePdfModal() {
-      document.getElementById('pdfModal').classList.remove('is-open');
-      document.getElementById('pdfIframe').src = '';
-    }
-
-    // Close on backdrop click
-    document.getElementById('pdfModal').addEventListener('click', function(e) {
-      if (e.target === this) closePdfModal();
-    });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePdfModal(); });
 
     function initScrollReveal() {
       const obs = new IntersectionObserver(entries => {
@@ -475,3 +451,4 @@
   </script>
 </body>
 </html>
+

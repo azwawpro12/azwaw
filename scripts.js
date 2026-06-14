@@ -95,7 +95,7 @@ function renderProjects(projs, category = 'all') {
         </div>
       ` : ''}
       <div style="padding: 1rem 0 0.5rem;">
-        ${p.category ? `<span style="background:rgba(14,116,144,0.1);color:#0E7490;padding:0.2rem 0.7rem;border-radius:6px;font-size:0.76rem;font-weight:600;border:1px solid rgba(14,116,144,0.2);">${categoryLabel[p.category] || p.category}</span>` : ''}
+        ${p.category ? `<span style="background:rgba(29,92,78,0.1);color:#1D5C4E;padding:0.2rem 0.7rem;border-radius:6px;font-size:0.76rem;font-weight:600;border:1px solid rgba(29,92,78,0.2);">${categoryLabel[p.category] || p.category}</span>` : ''}
       </div>
       <h4>${p.title}</h4>
       <p>${p.description.substring(0, 110)}${p.description.length > 110 ? '...' : ''}</p>
@@ -239,21 +239,11 @@ function openCertModal(id) {
 
     <p style="margin:1rem 0; line-height:1.6;">${c.description}</p>`;
 
-  // Iframe PDF grand
-  if (c.link && c.link.toLowerCase().endsWith('.pdf')) {
-    html += `
-      <div style="position:relative; height:85vh; margin-top:1.5rem;">
-        <iframe src="${c.link}#toolbar=1&navpanes=1&scrollbar=1" 
-                width="100%" 
-                height="100%" 
-                style="border:none; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,0.2);">
-        </iframe>
-      </div>`;
-  } else if (c.link) {
+  if (c.link) {
     html += `
       <div style="text-align:center; margin-top:2rem;">
-        <a href="${c.link}" target="_blank" class="btn btn-primary" style="font-size:1.1rem;">
-          <i class="fas fa-external-link-alt"></i> Voir la certification
+        <a href="${c.link}" target="_blank" rel="noopener" class="btn" style="font-size:1rem;">
+          <i class="fas fa-arrow-up-right-from-square"></i> Ouvrir la certification
         </a>
       </div>`;
   }
@@ -286,20 +276,14 @@ async function loadProcedures() {
 function openProcedureModal(id) {
   const p = procedures.find(p => p.id === id);
   if (!p) return;
-  
+  if (p.file) {
+    window.open(p.file, '_blank', 'noopener');
+    return;
+  }
   let html = `
     <h3 style="margin-bottom:0.5rem;">${p.title}</h3>
-    <p class="modal-date" style="margin-bottom:1rem; font-size:0.9rem;">${p.date || ''}</p>`;
-  
-  if (p.file) {
-    html += `
-      <div style="position:relative; height:85vh;">  <!-- Grand conteneur pour PDF -->
-        <iframe src="${p.file}" width="100%" height="100%" style="border:none; border-radius:8px;"></iframe>
-      </div>`;
-  } else {
-    html += `<p style="color:var(--accent-tertiary);">Aucun PDF disponible pour cette procédure.</p>`;
-  }
-  
+    <p class="modal-date" style="margin-bottom:1rem; font-size:0.9rem;">${p.date || ''}</p>
+    <p style="color:var(--text-2);">Aucun PDF disponible pour cette procédure.</p>`;
   document.getElementById('modalContent').innerHTML = html;
   document.getElementById('modal').classList.add('is-open');
 }
@@ -431,18 +415,8 @@ function openTCSModal() {
   const content = document.getElementById('modalContent');
   if (!modal || !content) return;
 
-  content.innerHTML = `
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; gap:1rem; flex-wrap:wrap;">
-      <h3 style="margin:0; background:linear-gradient(135deg,#047857,#0E7490); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
-        Tableau de Synthèse E5
-      </h3>
-      <a href="fi/TCS.pdf" target="_blank" rel="noopener noreferrer" class="btn" style="font-size:0.85rem; padding:0.5rem 1.2rem; flex-shrink:0;">
-        <i class="fas fa-arrow-up-right-from-square"></i> Ouvrir
-      </a>
-    </div>
-    <div style="height:80vh; border-radius:12px; overflow:hidden; border:1px solid var(--border);">
-      <iframe src="fi/TCS.pdf" width="100%" height="100%" style="border:none; display:block;"></iframe>
-    </div>`;
+  window.open('fi/TCS.pdf', '_blank', 'noopener');
+  return;
 
   modal.classList.add('is-open');
 }
