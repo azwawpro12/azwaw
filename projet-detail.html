@@ -385,7 +385,7 @@
             </p>
             <div class="procedures-linked-grid">
               ${linkedProcs.map(proc => `
-                <div class="proc-linked-card" onclick="openPdfModal('${proc.file}', '${proc.title}')" style="cursor:pointer;">
+                <a class="proc-linked-card" href="${proc.file}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
                   ${proc.vitrine ? `
                     <img src="${proc.vitrine}" alt="${proc.title}" class="proc-linked-vitrine">
                   ` : `
@@ -401,7 +401,7 @@
                       <i class="fas fa-file-pdf"></i> Ouvrir le PDF
                     </span>
                   </div>
-                </div>
+                </a>
               `).join('')}
             </div>
           </div>`;

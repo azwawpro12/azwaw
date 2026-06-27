@@ -280,80 +280,8 @@ async function loadProcedures() {
 }
 
 
-function _loadScript(src) {
-  return new Promise((res, rej) => {
-    if (document.querySelector(`script[src="${src}"]`)) { res(); return; }
-    const s = document.createElement('script');
-    s.src = src; s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
-  });
-}
-
-async function _renderPdfPage(num) {
-  const page = await window._pdfDoc.getPage(num);
-  const canvas = document.getElementById('pdf-render-canvas');
-  const container = document.getElementById('pdf-render-container');
-  if (!canvas || !container) return;
-  const scale = Math.min((container.clientWidth - 32) / page.getViewport({ scale: 1 }).width, 2);
-  const vp = page.getViewport({ scale });
-  canvas.width = vp.width;
-  canvas.height = vp.height;
-  await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-  window._pdfPage = num;
-  const info = document.getElementById('pdf-page-info');
-  if (info) info.textContent = `${num} / ${window._pdfDoc.numPages}`;
-}
-
-window.changePdfPage = function(d) {
-  if (!window._pdfDoc) return;
-  const n = (window._pdfPage || 1) + d;
-  if (n < 1 || n > window._pdfDoc.numPages) return;
-  _renderPdfPage(n);
-};
-
-async function openPdfModal(url, title) {
-  const prev = document.getElementById('pdf-viewer-modal');
-  if (prev) prev.remove();
-  const modal = document.createElement('div');
-  modal.id = 'pdf-viewer-modal';
-  modal.innerHTML = `
-    <div class="pdf-modal-overlay" onclick="document.getElementById('pdf-viewer-modal').remove()"></div>
-    <div class="pdf-modal-box">
-      <div class="pdf-modal-header">
-        <span>${title || 'Document PDF'}</span>
-        <div style="display:flex;align-items:center;gap:0.4rem;">
-          <button class="pdf-nav-btn" onclick="changePdfPage(-1)">&#8249;</button>
-          <span id="pdf-page-info" style="font-size:0.82rem;color:var(--text-secondary);white-space:nowrap;min-width:50px;text-align:center;">…</span>
-          <button class="pdf-nav-btn" onclick="changePdfPage(1)">&#8250;</button>
-          <button class="pdf-close-btn" onclick="document.getElementById('pdf-viewer-modal').remove()">✕</button>
-        </div>
-      </div>
-      <div id="pdf-render-container" style="flex:1;overflow:auto;display:flex;justify-content:center;padding:1rem;background:#525659;">
-        <p style="color:#fff;align-self:center;font-size:0.95rem;">Chargement…</p>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(modal);
-  const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-  const WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-  if (!window.pdfjsLib) {
-    await _loadScript(PDFJS);
-    window.pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
-  }
-  try {
-    window._pdfDoc = await window.pdfjsLib.getDocument(url).promise;
-    const container = document.getElementById('pdf-render-container');
-    if (!container) return;
-    container.innerHTML = '<canvas id="pdf-render-canvas" style="max-width:100%;box-shadow:0 4px 24px rgba(0,0,0,0.5);"></canvas>';
-    await _renderPdfPage(1);
-  } catch(e) {
-    const container = document.getElementById('pdf-render-container');
-    if (container) container.innerHTML = '<p style="color:#fff;align-self:center;">Impossible de charger le PDF.</p>';
-  }
-}
-
-function openPdfLink(url, title) {
-  openPdfModal(url, title);
+function openPdfLink(url) {
+  window.open(url, '_blank');
 }
 
 function openProcedureModal(id) {
@@ -363,9 +291,9 @@ function openProcedureModal(id) {
 }
 function renderProcedures(procs) {
   document.getElementById('proceduresGrid').innerHTML = procs.map(p => {
-    const click = p.file ? `onclick="openPdfModal('${p.file}', '${p.title}')"` : '';
+    const href = p.file ? `href="${p.file}" target="_blank" rel="noopener noreferrer"` : '';
     return `
-    <div class="procedure-card card" ${click} style="cursor:${p.file ? 'pointer' : 'default'};">
+    <a class="procedure-card card" ${href} style="text-decoration:none;color:inherit;display:block;cursor:${p.file ? 'pointer' : 'default'};">
       ${p.vitrine ? `
         <div class="vitrine-container">
           <img src="${p.vitrine}" alt="${p.title}" class="procedure-vitrine">
@@ -378,7 +306,7 @@ function renderProcedures(procs) {
         <p class="card-date"><i class="fas fa-calendar-alt"></i> ${p.date}</p>
         <p>${p.description.substring(0, 120)}${p.description.length > 120 ? '...' : ''}</p>
       </div>
-    </div>`;
+    </a>`;
   }).join('');
 }
 
