@@ -166,7 +166,7 @@ function openModal(id) {
       const procTitle = proc ? proc.title : "Procédure inconnue";
       if (proc && proc.file) {
         html += `
-          <a href="${proc.file}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <a href="${proc.file}" target="_top" rel="noopener noreferrer" class="btn btn-primary">
             <i class="fas fa-file-pdf"></i> ${procTitle}
           </a>`;
       } else {
@@ -249,7 +249,7 @@ function openCertModal(id) {
   if (c.link) {
     html += `
       <div style="text-align:center; margin-top:2rem;">
-        <a href="${c.link}" target="_blank" class="btn btn-primary" style="font-size:1.1rem;">
+        <a href="${c.link}" target="${c.link.toLowerCase().endsWith('.pdf') ? '_top' : '_blank'}" class="btn btn-primary" style="font-size:1.1rem;">
           <i class="fas fa-external-link-alt"></i> Voir la certification
         </a>
       </div>`;
@@ -283,7 +283,7 @@ async function loadProcedures() {
 function openPdfLink(url) {
   const a = document.createElement('a');
   a.href = url;
-  a.target = '_blank';
+  a.target = '_top';
   a.rel = 'noopener noreferrer';
   document.body.appendChild(a);
   a.click();
@@ -297,7 +297,7 @@ function openProcedureModal(id) {
 }
 function renderProcedures(procs) {
   document.getElementById('proceduresGrid').innerHTML = procs.map(p => {
-    const href = p.file ? `href="${p.file}" target="_blank" rel="noopener noreferrer"` : `href="#"`;
+    const href = p.file ? `href="${p.file}" target="_top" rel="noopener noreferrer"` : `href="#"`;
     return `
     <a class="procedure-card card" ${href} style="text-decoration:none;display:block;color:inherit;">
       ${p.vitrine ? `

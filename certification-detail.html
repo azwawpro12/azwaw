@@ -81,7 +81,7 @@
       }
       if (c.link) {
         const l = document.getElementById('certLink');
-        l.href = c.link; l.target = '_blank';
+        l.href = c.link; l.target = c.link.toLowerCase().endsWith('.pdf') ? '_top' : '_blank';
       }
     }
     loadCertDetail();
