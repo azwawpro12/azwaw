@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTS SIO - Azwaw</title>
+  <link rel="stylesheet" href="style.css?v=22">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ── Grille options ── */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 768px) { .options-grid { grid-template-columns: 1fr; } }
+
+    .option-card {
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      padding: 2rem;
+      background: var(--bg-card);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .option-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .option-card.sisr::before { background: var(--gradient-btn); }
+    .option-card.slam::before { background: linear-gradient(135deg, #2563EB, #1D4ED8); }
+    .option-card.sisr { border-color: rgba(29,92,78,0.3); }
+    .option-card.active-option { box-shadow: var(--shadow-lg); }
+
+    .option-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.3rem 0.8rem; border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .badge-sisr { background: var(--green-dim); color: var(--green); border: 1px solid rgba(29,92,78,0.2); }
+    .badge-slam { background: rgba(37,99,235,0.08); color: #2563EB; border: 1px solid rgba(37,99,235,0.2); }
+    .badge-me { background: var(--green); color: #fff; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 4px; margin-left: 0.4rem; }
+
+    .option-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--text-1); }
+    .option-card p  { color: var(--text-2); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1rem; }
+    .option-card ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
+    .option-card ul li {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      font-size: 0.875rem; color: var(--text-2);
+    }
+    .option-card ul li i { color: var(--green); margin-top: 0.15rem; flex-shrink: 0; font-size: 0.8rem; }
+    .option-card.slam ul li i { color: #2563EB; }
+
+    /* ── Finalités ── */
+    .finalites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem; margin: 2rem 0;
+    }
+    .finalite-card {
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      display: flex; gap: 1rem;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .finalite-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--green-border); }
+    .finalite-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gradient-btn); color: #fff;
+      border-radius: 10px; font-size: 1rem;
+    }
+    .finalite-body h4 { font-size: 0.95rem; color: var(--text-1); margin-bottom: 0.3rem; font-weight: 600; }
+    .finalite-body p  { font-size: 0.845rem; color: var(--text-2); line-height: 1.6; margin: 0; }
+
+    /* ── Débouchés ── */
+    .debouches-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem; margin: 2rem 0;
+    }
+    .debouche-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      font-size: 0.875rem; font-weight: 500; color: var(--text-1);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .debouche-item:hover { border-color: var(--green-border); background: var(--green-dim); }
+    .debouche-item i { color: var(--green); font-size: 0.9rem; }
+
+    /* ── Section ── */
+    .bts-section { margin: 4rem 0 2rem; }
+    .bts-section-label {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700; color: var(--text-1);
+      margin-bottom: 0.5rem;
+    }
+    .bts-section-desc { color: var(--text-2); font-size: 0.9rem; margin-bottom: 0; }
+
+    /* ── Intro block ── */
+    .intro-block {
+      background: var(--green-dim);
+      border-left: 3px solid var(--green);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.5rem 1.75rem;
+      margin: 2rem 0;
+    }
+    .intro-block p { color: #111827 !important; line-height: 1.8; margin: 0; font-size: 0.95rem; font-weight: 400; }
+    .intro-block p + p { margin-top: 0.75rem; }
+
+    /* ── Matières ── */
+    .matieres-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem; margin: 2rem 0;
+    }
+    .matiere-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: 10px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      font-size: 0.875rem; color: var(--text-1);
+    }
+    .matiere-item i { color: var(--green); flex-shrink: 0; }
+
+    /* ── Stat cards ── */
+    .stats-row {
+      display: flex; gap: 1.25rem; flex-wrap: wrap; margin: 2rem 0;
+    }
+    .stat-box {
+      flex: 1; min-width: 140px;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-num {
+      font-family: var(--font-serif);
+      font-size: 2.2rem; font-weight: 800;
+      color: var(--green); display: block;
+      line-height: 1;
+    }
+    .stat-lbl { font-size: 0.825rem; color: var(--text-2); margin-top: 0.35rem; display: block; }
+  </style>
+</head>
+<body>
+  <div id="scrollProgress"></div>
+
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="bts-sio.html" class="active">BTS SIO</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu">
+            <li><a href="projets.html">Tous</a></li>
+            <li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li>
+            <li><a href="projets.html?cat=professional">Pro</a></li>
+          </ul>
+        </li>
+        <li><a href="Procédures.html">Procédures</a></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html">CV</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <div class="page-head">
+    <span class="eyebrow">FORMATION</span>
+    <h1 class="page-head-title">BTS SIO</h1>
+    <p class="page-head-sub">Services Informatiques aux Organisations</p>
+  </div>
+
+  <main class="container" style="padding: 3rem 0 6rem;">
+
+    <!-- Intro -->
+    <div class="intro-block reveal">
+      <p>Le <strong>BTS SIO</strong> (Brevet de Technicien Supérieur — Services Informatiques aux Organisations) est un diplôme national de niveau Bac+2 du Ministère de l'Éducation Nationale. Il prépare des techniciens supérieurs capables de répondre aux besoins informatiques des entreprises publiques et privées.</p>
+      <p>La formation se déroule sur <strong>2 ans</strong> et comprend des périodes de stage en entreprise. Elle est accessible après un Baccalauréat technologique, général ou professionnel.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row reveal">
+      <div class="stat-box">
+        <span class="stat-num">2</span>
+        <span class="stat-lbl">Ans de formation</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">2</span>
+        <span class="stat-lbl">Options disponibles</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">10+</span>
+        <span class="stat-lbl">Semaines de stage</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">Bac+2</span>
+        <span class="stat-lbl">Niveau obtenu</span>
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div class="bts-section reveal">
+      <h2 class="bts-section-label">Les deux options</h2>
+      <p class="bts-section-desc">Le BTS SIO se divise en deux spécialités selon le profil visé.</p>
+    </div>
+
+    <div class="options-grid">
+      <!-- SISR -->
+      <div class="option-card sisr active-option reveal">
+        <span class="option-badge badge-sisr"><i class="fas fa-network-wired"></i> Option SISR <span class="badge-me">Mon option</span></span>
+        <h3>Solutions d'Infrastructure, Systèmes et Réseaux</h3>
+        <p>L'option SISR forme des techniciens spécialisés dans l'administration des infrastructures réseaux et systèmes. L'étudiant apprend à concevoir, déployer, sécuriser et maintenir des environnements informatiques complexes.</p>
+        <ul>
+          <li><i class="fas fa-check"></i> Administration de serveurs (Windows Server, Linux)</li>
+          <li><i class="fas fa-check"></i> Configuration de réseaux (routeurs, switches, VLANs)</li>
+          <li><i class="fas fa-check"></i> Cybersécurité et gestion des accès</li>
+          <li><i class="fas fa-check"></i> Virtualisation (VMware, Hyper-V, Proxmox)</li>
+          <li><i class="fas fa-check"></i> Supervision et monitoring des infrastructures</li>
+          <li><i class="fas fa-check"></i> Services cloud et continuité d'activité</li>
+        </ul>
+      </div>
+
+      <!-- SLAM -->
+      <div class="option-card slam reveal">
+        <span class="option-badge badge-slam"><i class="fas fa-code"></i> Option SLAM</span>
+        <h3>Solutions Logicielles et Applications Métiers</h3>
+        <p>L'option SLAM forme des développeurs capables de concevoir, développer et maintenir des applications et des solutions logicielles adaptées aux besoins des organisations.</p>
+        <ul>
+          <li><i class="fas fa-check"></i> Développement d'applications web et mobiles</li>
+          <li><i class="fas fa-check"></i> Conception de bases de données (SQL, NoSQL)</li>
+          <li><i class="fas fa-check"></i> Programmation orientée objet (Java, Python, PHP)</li>
+          <li><i class="fas fa-check"></i> Gestion de projet et méthodes Agile</li>
+          <li><i class="fas fa-check"></i> Intégration de solutions ERP/CRM</li>
+          <li><i class="fas fa-check"></i> Développement d'APIs et services web</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Finalités -->
+    <div class="bts-section reveal">
+      <h2 class="bts-section-label">Finalités de la formation</h2>
+      <p class="bts-section-desc">Les objectifs que le BTS SIO vise à atteindre pour chaque étudiant.</p>
+    </div>
+
+    <div class="finalites-grid">
+      <div class="finalite-card reveal">
+        <div class="finalite-icon"><i class="fas fa-server"></i></div>
+        <div class="finalite-body">
+          <h4>Gérer le patrimoine informatique</h4>
+          <p>Recenser, identifier et exploiter les ressources du système informatique, mettre à jour la documentation.</p>
+        </div>
+      </div>
+      <div class="finalite-card reveal">
+        <div class="finalite-icon"><i class="fas fa-headset"></i></div>
+        <div class="finalite-body">
+          <h4>Répondre aux incidents</h4>
+          <p>Traiter les incidents et les demandes d'assistance en assurant la qualité de service attendue.</p>
+        </div>
+      </div>
+      <div class="finalite-card reveal">
+        <div class="finalite-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="finalite-body">
+          <h4>Sécuriser l'infrastructure</h4>
+          <p>Protéger les données, assurer la disponibilité du système et mettre en œuvre les politiques de sécurité.</p>
+        </div>
+      </div>
+      <div class="finalite-card reveal">
+        <div class="finalite-icon"><i class="fas fa-tasks"></i></div>
+        <div class="finalite-body">
+          <h4>Gérer le parc informatique</h4>
+          <p>Déployer, configurer et maintenir les équipements, assurer la continuité de service.</p>
+        </div>
+      </div>
+      <div class="finalite-card reveal">
+        <div class="finalite-icon"><i class="fas fa-project-diagram"></i></div>
+        <div class="finalite-body">
+          <h4>Concevoir des solutions</h4>
+          <p>Analyser les besoins, proposer et mettre en œuvre des solutions techniques adaptées à l'organisation.</p>
+        </div>
+      </div>
+      <div class="finalite-card reveal">
+        <div class="finalite-icon"><i class="fas fa-users"></i></div>
+        <div class="finalite-body">
+          <h4>Travailler en équipe</h4>
+          <p>Communiquer, documenter et collaborer au sein d'une équipe informatique ou avec les utilisateurs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Matières -->
+    <div class="bts-section reveal">
+      <h2 class="bts-section-label">Matières enseignées</h2>
+      <p class="bts-section-desc">Un programme alliant culture générale, compétences techniques et professionnelles.</p>
+    </div>
+
+    <div class="matieres-grid">
+      <div class="matiere-item reveal"><i class="fas fa-network-wired"></i> Réseaux et télécommunications</div>
+      <div class="matiere-item reveal"><i class="fas fa-desktop"></i> Administration systèmes</div>
+      <div class="matiere-item reveal"><i class="fas fa-lock"></i> Cybersécurité</div>
+      <div class="matiere-item reveal"><i class="fas fa-database"></i> Bases de données</div>
+      <div class="matiere-item reveal"><i class="fas fa-code"></i> Développement applicatif</div>
+      <div class="matiere-item reveal"><i class="fas fa-cloud"></i> Services cloud</div>
+      <div class="matiere-item reveal"><i class="fas fa-project-diagram"></i> Architecture des systèmes</div>
+      <div class="matiere-item reveal"><i class="fas fa-shield-virus"></i> Sécurité des données</div>
+      <div class="matiere-item reveal"><i class="fas fa-book"></i> Culture générale et expression</div>
+      <div class="matiere-item reveal"><i class="fas fa-language"></i> Anglais professionnel</div>
+      <div class="matiere-item reveal"><i class="fas fa-calculator"></i> Mathématiques pour l'informatique</div>
+      <div class="matiere-item reveal"><i class="fas fa-briefcase"></i> Gestion de projet</div>
+    </div>
+
+    <!-- Débouchés -->
+    <div class="bts-section reveal">
+      <h2 class="bts-section-label">Débouchés professionnels</h2>
+      <p class="bts-section-desc">Métiers accessibles à l'issue du BTS SIO, notamment avec l'option SISR.</p>
+    </div>
+
+    <div class="debouches-list">
+      <div class="debouche-item reveal"><i class="fas fa-network-wired"></i> Administrateur réseau</div>
+      <div class="debouche-item reveal"><i class="fas fa-server"></i> Administrateur systèmes</div>
+      <div class="debouche-item reveal"><i class="fas fa-shield-alt"></i> Technicien cybersécurité</div>
+      <div class="debouche-item reveal"><i class="fas fa-headset"></i> Technicien support N1/N2</div>
+      <div class="debouche-item reveal"><i class="fas fa-tools"></i> Technicien informatique</div>
+      <div class="debouche-item reveal"><i class="fas fa-cloud"></i> Technicien cloud / infra</div>
+      <div class="debouche-item reveal"><i class="fas fa-building"></i> Ingénieur système (après LP)</div>
+      <div class="debouche-item reveal"><i class="fas fa-graduation-cap"></i> Licence Pro (poursuite)</div>
+    </div>
+
+    <!-- Poursuite études -->
+    <div class="card reveal" style="margin-top:3rem; padding:2rem; display:flex; align-items:flex-start; gap:1.25rem;">
+      <div style="width:48px;height:48px;flex-shrink:0;background:var(--gradient-btn);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">
+        <i class="fas fa-arrow-up"></i>
+      </div>
+      <div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.4rem;">Poursuite d'études</h3>
+        <p style="color:var(--text-2);font-size:0.9rem;line-height:1.75;margin:0;">
+          Le BTS SIO ouvre la voie vers une <strong>Licence Professionnelle</strong> (Bac+3) en informatique, réseaux ou cybersécurité, ou vers un <strong>Bachelor / BUT informatique</strong>. Il est également possible d'intégrer une école d'ingénieur via des admissions parallèles.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+
+  <button id="backToTop" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="scripts.js?v=13"></script>
+  <script>
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY > 400));
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+      const p = document.getElementById('scrollProgress');
+      if (p) p.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+    });
+
+    // Mobile menu
+    document.getElementById('mobileToggle')?.addEventListener('click', () => {
+      document.querySelector('.nav-menu').classList.toggle('active');
+      document.getElementById('mobileToggle').classList.toggle('open');
+    });
+
+    // Dropdown
+    (function() {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      const isMobile = () => window.innerWidth <= 900;
+      dropdowns.forEach(dd => {
+        let t;
+        dd.addEventListener('mouseenter', () => { if (!isMobile()) { clearTimeout(t); dd.classList.add('open'); } });
+        dd.addEventListener('mouseleave', () => { if (!isMobile()) t = setTimeout(() => dd.classList.remove('open'), 150); });
+        dd.querySelector('a')?.addEventListener('click', e => {
+          if (!isMobile()) return;
+          e.preventDefault();
+          const was = dd.classList.contains('open');
+          dropdowns.forEach(d => d.classList.remove('open'));
+          if (!was) dd.classList.add('open');
+        });
+      });
+      document.addEventListener('click', e => { if (!e.target.closest('.dropdown')) dropdowns.forEach(d => d.classList.remove('open')); });
+    })();
+  </script>
+</body>
+</html>
+
