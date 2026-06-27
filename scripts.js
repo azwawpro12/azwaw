@@ -285,24 +285,34 @@ function openPdfLink(url) {
 }
 
 function presentPdf(url, title, e) {
-  if (e) e.preventDefault();
+  if (e) { e.preventDefault(); e.stopPropagation(); }
   const prev = document.getElementById('pdf-present-modal');
   if (prev) prev.remove();
+  const pdfSrc = url + (url.includes('#') ? '&' : '#') + 'toolbar=1&navpanes=1&zoom=page-fit';
   const modal = document.createElement('div');
   modal.id = 'pdf-present-modal';
   modal.innerHTML = `
     <div class="ppm-header">
-      <span class="ppm-title">${title || 'Document PDF'}</span>
-      <div style="display:flex;gap:0.5rem;">
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="ppm-btn" title="Ouvrir dans un onglet">
-          <i class="fas fa-external-link-alt"></i>
+      <span class="ppm-title"><i class="fas fa-file-pdf" style="color:#4ade80;margin-right:0.5rem;"></i>${title || 'Document PDF'}</span>
+      <div style="display:flex;gap:0.5rem;align-items:center;">
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="ppm-btn">
+          <i class="fas fa-external-link-alt"></i><span class="ppm-btn-label"> Nouvel onglet</span>
         </a>
-        <button class="ppm-btn ppm-close" onclick="document.getElementById('pdf-present-modal').remove()" title="Fermer">✕</button>
+        <a href="${url}" download class="ppm-btn" title="Télécharger">
+          <i class="fas fa-download"></i>
+        </a>
+        <button class="ppm-btn ppm-close" onclick="document.getElementById('pdf-present-modal').remove()">
+          <i class="fas fa-times"></i><span class="ppm-btn-label"> Fermer</span>
+        </button>
       </div>
     </div>
-    <iframe src="${url}" class="ppm-frame"></iframe>
+    <iframe src="${pdfSrc}" class="ppm-frame" allowfullscreen></iframe>
   `;
   document.body.appendChild(modal);
+  const onKey = (ev) => {
+    if (ev.key === 'Escape') { modal.remove(); document.removeEventListener('keydown', onKey); }
+  };
+  document.addEventListener('keydown', onKey);
 }
 
 function openProcedureModal(id) {
