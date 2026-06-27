@@ -166,9 +166,9 @@ function openModal(id) {
       const procTitle = proc ? proc.title : "Procédure inconnue";
       if (proc && proc.file) {
         html += `
-          <a href="${proc.file}" target="_top" rel="noopener noreferrer" class="btn btn-primary">
+          <button onclick="openPdfModal('${proc.file}', '${procTitle}')" class="btn btn-primary">
             <i class="fas fa-file-pdf"></i> ${procTitle}
-          </a>`;
+          </button>`;
       } else {
         html += `
           <span class="btn btn-primary" style="opacity:0.5;cursor:default;">
@@ -249,7 +249,7 @@ function openCertModal(id) {
   if (c.link) {
     html += `
       <div style="text-align:center; margin-top:2rem;">
-        <a href="${c.link}" target="${c.link.toLowerCase().endsWith('.pdf') ? '_top' : '_blank'}" class="btn btn-primary" style="font-size:1.1rem;">
+        <a href="${c.link}" ${c.link.toLowerCase().endsWith('.pdf') ? `onclick="event.preventDefault(); openPdfModal('${c.link}', '${c.title}')"` : 'target="_blank" rel="noopener noreferrer"'} class="btn btn-primary" style="font-size:1.1rem;">
           <i class="fas fa-external-link-alt"></i> Voir la certification
         </a>
       </div>`;
@@ -280,14 +280,26 @@ async function loadProcedures() {
 }
 
 
-function openPdfLink(url) {
-  const a = document.createElement('a');
-  a.href = url;
-  a.target = '_top';
-  a.rel = 'noopener noreferrer';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+function openPdfModal(url, title) {
+  const existing = document.getElementById('pdf-viewer-modal');
+  if (existing) existing.remove();
+  const modal = document.createElement('div');
+  modal.id = 'pdf-viewer-modal';
+  modal.innerHTML = `
+    <div class="pdf-modal-overlay" onclick="document.getElementById('pdf-viewer-modal').remove()"></div>
+    <div class="pdf-modal-box">
+      <div class="pdf-modal-header">
+        <span>${title || 'Document PDF'}</span>
+        <button onclick="document.getElementById('pdf-viewer-modal').remove()">✕</button>
+      </div>
+      <embed src="${url}" type="application/pdf" class="pdf-modal-embed">
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+function openPdfLink(url, title) {
+  openPdfModal(url, title);
 }
 
 function openProcedureModal(id) {
@@ -297,9 +309,9 @@ function openProcedureModal(id) {
 }
 function renderProcedures(procs) {
   document.getElementById('proceduresGrid').innerHTML = procs.map(p => {
-    const href = p.file ? `href="${p.file}" target="_top" rel="noopener noreferrer"` : `href="#"`;
+    const click = p.file ? `onclick="openPdfModal('${p.file}', '${p.title}')"` : '';
     return `
-    <a class="procedure-card card" ${href} style="text-decoration:none;display:block;color:inherit;">
+    <div class="procedure-card card" ${click} style="cursor:${p.file ? 'pointer' : 'default'};">
       ${p.vitrine ? `
         <div class="vitrine-container">
           <img src="${p.vitrine}" alt="${p.title}" class="procedure-vitrine">
@@ -312,7 +324,7 @@ function renderProcedures(procs) {
         <p class="card-date"><i class="fas fa-calendar-alt"></i> ${p.date}</p>
         <p>${p.description.substring(0, 120)}${p.description.length > 120 ? '...' : ''}</p>
       </div>
-    </a>`;
+    </div>`;
   }).join('');
 }
 

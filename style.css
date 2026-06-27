@@ -198,6 +198,16 @@ body::before, body::after { content: none !important; display: none !important; 
   .dropdown.open .submenu { display: block; }
 }
 
+/* ── PDF Viewer Modal ────────────────────────────────────────── */
+#pdf-viewer-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.pdf-modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.75); }
+.pdf-modal-box { position: relative; z-index: 1; width: 100%; max-width: 960px; height: 90vh; background: var(--bg-primary); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 24px 80px rgba(0,0,0,0.4); }
+.pdf-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.pdf-modal-header span { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
+.pdf-modal-header button { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary); padding: 0.2rem 0.5rem; border-radius: 6px; transition: background 0.2s; }
+.pdf-modal-header button:hover { background: rgba(239,68,68,0.15); color: #f87171; }
+.pdf-modal-embed { flex: 1; width: 100%; border: none; display: block; }
+
 /* ── Scroll Progress ─────────────────────────────────────────── */
 #scrollProgress {
   position: fixed; top: 0; left: 0; height: 1.5px; width: 0%;
