@@ -316,8 +316,8 @@ function presentPdf(url, title, e) {
 
   document.getElementById('ppm-close-btn').onclick = () => modal.remove();
 
-  const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-  const WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const PDFJS = 'lib/pdf.min.js';
+  const WORKER = 'lib/pdf.worker.min.js';
   let pdfDoc = null, page = 1, scale = 1.5;
 
   function updateZoom() { document.getElementById('ppm-zoom-lvl').textContent = Math.round(scale * 100) + '%'; }
