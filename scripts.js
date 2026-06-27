@@ -191,7 +191,7 @@ function openModal(id) {
              style="max-width:100%; max-height:65vh; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s ease;"
              onmouseover="this.style.transform='scale(1.08)'"
              onmouseout="this.style.transform='scale(1)'"
-             onclick="window.open('${p.schema}', '_blank');">
+             onclick="openPdfLink('${p.schema}');">
         <p style="margin-top:0.6rem; font-size:0.9rem; color:var(--text-secondary);">
           Survolez pour zoomer • Cliquez pour agrandir
         </p>
@@ -246,17 +246,7 @@ function openCertModal(id) {
 
     <p style="margin:1rem 0; line-height:1.6;">${c.description}</p>`;
 
-  // Iframe PDF grand
-  if (c.link && c.link.toLowerCase().endsWith('.pdf')) {
-    html += `
-      <div style="position:relative; height:85vh; margin-top:1.5rem;">
-        <iframe src="${c.link}#toolbar=1&navpanes=1&scrollbar=1" 
-                width="100%" 
-                height="100%" 
-                style="border:none; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,0.2);">
-        </iframe>
-      </div>`;
-  } else if (c.link) {
+  if (c.link) {
     html += `
       <div style="text-align:center; margin-top:2rem;">
         <a href="${c.link}" target="_blank" class="btn btn-primary" style="font-size:1.1rem;">
@@ -290,12 +280,20 @@ async function loadProcedures() {
 }
 
 
+function openPdfLink(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 function openProcedureModal(id) {
   const p = procedures.find(p => p.id === id);
   if (!p) return;
-  if (p.file) {
-    window.open(p.file, '_blank', 'noopener,noreferrer');
-  }
+  if (p.file) openPdfLink(p.file);
 }
 function renderProcedures(procs) {
   document.getElementById('proceduresGrid').innerHTML = procs.map(p => {
@@ -423,7 +421,7 @@ async function loadTCS() {
 }
 
 function openTCSModal() {
-  window.open('fi/TCS.pdf', '_blank', 'noopener,noreferrer');
+  openPdfLink('fi/TCS.pdf');
 }
 // Fermeture Modal
 document.addEventListener('click', e => {

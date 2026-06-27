@@ -366,7 +366,7 @@
             <h2><i class="fas fa-project-diagram"></i> Schéma Technique</h2>
             <div class="schema-container">
               <img src="${p.schema}" alt="Schéma ${p.title}" class="schema-img"
-                   onclick="window.open('${p.schema}', '_blank')"
+                   onclick="openPdf('${p.schema}')"
                    title="Cliquer pour agrandir">
               <p style="margin-top:0.8rem; color:var(--text-secondary); font-size:0.9rem;">
                 <i class="fas fa-search-plus"></i> Cliquez sur le schéma pour l'agrandir
@@ -414,7 +414,13 @@
 
     function openPdf(file) {
       if (!file) return;
-      window.open(file, '_blank', 'noopener,noreferrer');
+      const a = document.createElement('a');
+      a.href = file;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 
     function initScrollReveal() {
