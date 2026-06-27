@@ -385,7 +385,7 @@
             </p>
             <div class="procedures-linked-grid">
               ${linkedProcs.map(proc => `
-                <div class="proc-linked-card" onclick="openPdf('${proc.file}', '${proc.title}')">
+                <a class="proc-linked-card" href="${proc.file}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
                   ${proc.vitrine ? `
                     <img src="${proc.vitrine}" alt="${proc.title}" class="proc-linked-vitrine">
                   ` : `
@@ -397,11 +397,11 @@
                     <h4>${proc.title}</h4>
                     ${proc.date ? `<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-calendar"></i> ${proc.date}</p>` : ''}
                     <p>${proc.description.substring(0, 100)}${proc.description.length > 100 ? '...' : ''}</p>
-                    <button class="proc-open-btn" onclick="event.stopPropagation(); openPdf('${proc.file}', '${proc.title}')">
+                    <span class="proc-open-btn">
                       <i class="fas fa-file-pdf"></i> Ouvrir le PDF
-                    </button>
+                    </span>
                   </div>
-                </div>
+                </a>
               `).join('')}
             </div>
           </div>`;
