@@ -204,9 +204,10 @@ body::before, body::after { content: none !important; display: none !important; 
 .pdf-modal-box { position: relative; z-index: 1; width: 100%; max-width: 960px; height: 90vh; background: var(--bg-primary); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 24px 80px rgba(0,0,0,0.4); }
 .pdf-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1.25rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border); flex-shrink: 0; }
 .pdf-modal-header span { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
-.pdf-modal-header button { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary); padding: 0.2rem 0.5rem; border-radius: 6px; transition: background 0.2s; }
-.pdf-modal-header button:hover { background: rgba(239,68,68,0.15); color: #f87171; }
-.pdf-modal-embed { flex: 1; width: 100%; border: none; display: block; }
+.pdf-nav-btn { background: var(--bg-primary); border: 1px solid var(--border); font-size: 1.3rem; line-height:1; cursor: pointer; color: var(--text-primary); padding: 0.15rem 0.55rem; border-radius: 6px; transition: background 0.2s; }
+.pdf-nav-btn:hover { background: var(--green-light); color: var(--green); }
+.pdf-close-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary); padding: 0.2rem 0.5rem; border-radius: 6px; transition: background 0.2s; margin-left:0.25rem; }
+.pdf-close-btn:hover { background: rgba(239,68,68,0.15); color: #f87171; }
 
 /* ── Scroll Progress ─────────────────────────────────────────── */
 #scrollProgress {
@@ -224,7 +225,6 @@ body::before, body::after { content: none !important; display: none !important; 
   position: relative; overflow: hidden;
 }
 .hero-section .container, .hero .container { position: relative; z-index: 2; }
-.hero-hud { }
 
 /* Avatar */
 .hero-avatar { width: 96px; height: 96px; margin: 0 auto var(--sp-4); }
