@@ -288,31 +288,88 @@ function presentPdf(url, title, e) {
   if (e) { e.preventDefault(); e.stopPropagation(); }
   const prev = document.getElementById('pdf-present-modal');
   if (prev) prev.remove();
-  const pdfSrc = url + (url.includes('#') ? '&' : '#') + 'toolbar=1&navpanes=1&zoom=page-fit';
+
   const modal = document.createElement('div');
   modal.id = 'pdf-present-modal';
   modal.innerHTML = `
     <div class="ppm-header">
       <span class="ppm-title"><i class="fas fa-file-pdf" style="color:#4ade80;margin-right:0.5rem;"></i>${title || 'Document PDF'}</span>
-      <div style="display:flex;gap:0.5rem;align-items:center;">
-        <a href="${url}" target="_blank" rel="noopener noreferrer" class="ppm-btn">
-          <i class="fas fa-external-link-alt"></i><span class="ppm-btn-label"> Nouvel onglet</span>
-        </a>
-        <a href="${url}" download class="ppm-btn" title="Télécharger">
-          <i class="fas fa-download"></i>
-        </a>
-        <button class="ppm-btn ppm-close" onclick="document.getElementById('pdf-present-modal').remove()">
-          <i class="fas fa-times"></i><span class="ppm-btn-label"> Fermer</span>
-        </button>
+      <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;">
+        <button class="ppm-btn" id="ppm-zoom-out" title="Zoom −"><i class="fas fa-search-minus"></i></button>
+        <span id="ppm-zoom-lvl" class="ppm-zoom-label">150%</span>
+        <button class="ppm-btn" id="ppm-zoom-in" title="Zoom +"><i class="fas fa-search-plus"></i></button>
+        <div class="ppm-sep"></div>
+        <button class="ppm-btn" id="ppm-prev"><i class="fas fa-chevron-left"></i></button>
+        <span id="ppm-page-info" class="ppm-zoom-label">…</span>
+        <button class="ppm-btn" id="ppm-next"><i class="fas fa-chevron-right"></i></button>
+        <div class="ppm-sep"></div>
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="ppm-btn"><i class="fas fa-external-link-alt"></i><span class="ppm-btn-label"> Onglet</span></a>
+        <a href="${url}" download class="ppm-btn" title="Télécharger"><i class="fas fa-download"></i></a>
+        <button class="ppm-btn ppm-close" id="ppm-close-btn"><i class="fas fa-times"></i><span class="ppm-btn-label"> Fermer</span></button>
       </div>
     </div>
-    <iframe src="${pdfSrc}" class="ppm-frame" allowfullscreen></iframe>
+    <div id="ppm-body" class="ppm-body">
+      <div class="ppm-loading"><i class="fas fa-spinner fa-spin"></i><br>Chargement…</div>
+    </div>
   `;
   document.body.appendChild(modal);
+
+  document.getElementById('ppm-close-btn').onclick = () => modal.remove();
+
+  const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+  const WORKER = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  let pdfDoc = null, page = 1, scale = 1.5;
+
+  function updateZoom() { document.getElementById('ppm-zoom-lvl').textContent = Math.round(scale * 100) + '%'; }
+
+  async function renderPage(n) {
+    const body = document.getElementById('ppm-body');
+    if (!body || !pdfDoc) return;
+    const pg = await pdfDoc.getPage(n);
+    const vp = pg.getViewport({ scale });
+    const canvas = document.createElement('canvas');
+    canvas.width = vp.width; canvas.height = vp.height;
+    canvas.className = 'ppm-canvas';
+    body.innerHTML = ''; body.appendChild(canvas);
+    await pg.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+    page = n;
+    const info = document.getElementById('ppm-page-info');
+    if (info) info.textContent = `${n} / ${pdfDoc.numPages}`;
+  }
+
+  document.getElementById('ppm-prev').onclick   = () => { if (page > 1) renderPage(page - 1); };
+  document.getElementById('ppm-next').onclick   = () => { if (pdfDoc && page < pdfDoc.numPages) renderPage(page + 1); };
+  document.getElementById('ppm-zoom-in').onclick  = () => { scale = Math.min(scale + 0.25, 4); updateZoom(); renderPage(page); };
+  document.getElementById('ppm-zoom-out').onclick = () => { scale = Math.max(scale - 0.25, 0.5); updateZoom(); renderPage(page); };
+
   const onKey = (ev) => {
-    if (ev.key === 'Escape') { modal.remove(); document.removeEventListener('keydown', onKey); }
+    if (!document.getElementById('pdf-present-modal')) { document.removeEventListener('keydown', onKey); return; }
+    if (ev.key === 'Escape')      { modal.remove(); document.removeEventListener('keydown', onKey); }
+    if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown')  { if (pdfDoc && page < pdfDoc.numPages) renderPage(page + 1); }
+    if (ev.key === 'ArrowLeft'  || ev.key === 'ArrowUp')    { if (page > 1) renderPage(page - 1); }
+    if (ev.key === '+' || ev.key === '=') { scale = Math.min(scale + 0.25, 4); updateZoom(); renderPage(page); }
+    if (ev.key === '-')           { scale = Math.max(scale - 0.25, 0.5); updateZoom(); renderPage(page); }
   };
   document.addEventListener('keydown', onKey);
+
+  (async () => {
+    if (!window.pdfjsLib) {
+      await new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = PDFJS; s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
+    }
+    try {
+      pdfDoc = await window.pdfjsLib.getDocument(url).promise;
+      document.getElementById('ppm-page-info').textContent = `1 / ${pdfDoc.numPages}`;
+      await renderPage(1);
+    } catch {
+      const body = document.getElementById('ppm-body');
+      if (body) body.innerHTML = `<div class="ppm-loading"><i class="fas fa-exclamation-circle" style="color:#f87171;font-size:2rem;"></i><br>Impossible de charger ce PDF.<br><a href="${url}" target="_blank" style="color:#4ade80;margin-top:0.5rem;display:inline-block;">Ouvrir dans un onglet</a></div>`;
+    }
+  })();
 }
 
 function openProcedureModal(id) {
