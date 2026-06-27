@@ -284,6 +284,27 @@ function openPdfLink(url) {
   window.open(url, '_blank');
 }
 
+function presentPdf(url, title, e) {
+  if (e) e.preventDefault();
+  const prev = document.getElementById('pdf-present-modal');
+  if (prev) prev.remove();
+  const modal = document.createElement('div');
+  modal.id = 'pdf-present-modal';
+  modal.innerHTML = `
+    <div class="ppm-header">
+      <span class="ppm-title">${title || 'Document PDF'}</span>
+      <div style="display:flex;gap:0.5rem;">
+        <a href="${url}" target="_blank" rel="noopener noreferrer" class="ppm-btn" title="Ouvrir dans un onglet">
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <button class="ppm-btn ppm-close" onclick="document.getElementById('pdf-present-modal').remove()" title="Fermer">✕</button>
+      </div>
+    </div>
+    <iframe src="${url}" class="ppm-frame"></iframe>
+  `;
+  document.body.appendChild(modal);
+}
+
 function openProcedureModal(id) {
   const p = procedures.find(p => p.id === id);
   if (!p) return;
@@ -293,20 +314,23 @@ function renderProcedures(procs) {
   document.getElementById('proceduresGrid').innerHTML = procs.map(p => {
     const href = p.file ? `href="${p.file}" target="_blank" rel="noopener noreferrer"` : '';
     return `
-    <a class="procedure-card card" ${href} style="text-decoration:none;color:inherit;display:block;cursor:${p.file ? 'pointer' : 'default'};">
-      ${p.vitrine ? `
-        <div class="vitrine-container">
-          <img src="${p.vitrine}" alt="${p.title}" class="procedure-vitrine">
+    <div class="pdf-card-wrap">
+      <a class="procedure-card card" ${href} style="text-decoration:none;color:inherit;display:block;cursor:${p.file ? 'pointer' : 'default'};">
+        ${p.vitrine ? `
+          <div class="vitrine-container">
+            <img src="${p.vitrine}" alt="${p.title}" class="procedure-vitrine">
+          </div>
+        ` : `
+          <i class="${p.icon || 'fa-solid fa-file-pdf'} procedure-icon"></i>
+        `}
+        <div class="card-content">
+          <h4>${p.title}</h4>
+          <p class="card-date"><i class="fas fa-calendar-alt"></i> ${p.date}</p>
+          <p>${p.description.substring(0, 120)}${p.description.length > 120 ? '...' : ''}</p>
         </div>
-      ` : `
-        <i class="${p.icon || 'fa-solid fa-file-pdf'} procedure-icon"></i>
-      `}
-      <div class="card-content">
-        <h4>${p.title}</h4>
-        <p class="card-date"><i class="fas fa-calendar-alt"></i> ${p.date}</p>
-        <p>${p.description.substring(0, 120)}${p.description.length > 120 ? '...' : ''}</p>
-      </div>
-    </a>`;
+      </a>
+      ${p.file ? `<button class="present-trigger" onclick="presentPdf('${p.file}','${p.title}',event)"><i class="fas fa-expand"></i> Présenter</button>` : ''}
+    </div>`;
   }).join('');
 }
 

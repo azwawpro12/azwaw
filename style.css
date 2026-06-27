@@ -209,6 +209,18 @@ body::before, body::after { content: none !important; display: none !important; 
 .pdf-close-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary); padding: 0.2rem 0.5rem; border-radius: 6px; transition: background 0.2s; margin-left:0.25rem; }
 .pdf-close-btn:hover { background: rgba(239,68,68,0.15); color: #f87171; }
 
+/* ── PDF Présentation plein écran ────────────────────────────── */
+#pdf-present-modal { position: fixed; inset: 0; z-index: 10000; display: flex; flex-direction: column; background: #1a1a1a; }
+.ppm-header { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: #111; border-bottom: 1px solid #333; flex-shrink: 0; }
+.ppm-title { color: #fff; font-weight: 600; font-size: 0.95rem; }
+.ppm-btn { display:inline-flex; align-items:center; justify-content:center; background: #2a2a2a; border: 1px solid #444; color: #ccc; font-size: 0.9rem; padding: 0.35rem 0.65rem; border-radius: 6px; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.ppm-btn:hover { background: #3a3a3a; color: #fff; }
+.ppm-close:hover { background: rgba(239,68,68,0.25); color: #f87171; border-color: rgba(239,68,68,0.4); }
+.ppm-frame { flex: 1; width: 100%; border: none; }
+.present-trigger { position: absolute; top: 0.5rem; right: 0.5rem; z-index: 2; background: var(--green); color: #fff; border: none; border-radius: 6px; padding: 0.25rem 0.5rem; font-size: 0.78rem; cursor: pointer; opacity: 0; transition: opacity 0.2s; }
+.pdf-card-wrap:hover .present-trigger { opacity: 1; }
+.pdf-card-wrap { position: relative; }
+
 /* ── Scroll Progress ─────────────────────────────────────────── */
 #scrollProgress {
   position: fixed; top: 0; left: 0; height: 1.5px; width: 0%;

@@ -385,23 +385,24 @@
             </p>
             <div class="procedures-linked-grid">
               ${linkedProcs.map(proc => `
-                <a class="proc-linked-card" href="${proc.file}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
-                  ${proc.vitrine ? `
-                    <img src="${proc.vitrine}" alt="${proc.title}" class="proc-linked-vitrine">
-                  ` : `
-                    <div style="height:120px; display:flex; align-items:center; justify-content:center; background:var(--bg-secondary);">
-                      <i class="fas fa-file-pdf" style="font-size:3rem; color:var(--accent-primary); opacity:0.5;"></i>
+                <div class="pdf-card-wrap">
+                  <a class="proc-linked-card" href="${proc.file}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit;display:block;">
+                    ${proc.vitrine ? `
+                      <img src="${proc.vitrine}" alt="${proc.title}" class="proc-linked-vitrine">
+                    ` : `
+                      <div style="height:120px; display:flex; align-items:center; justify-content:center; background:var(--bg-secondary);">
+                        <i class="fas fa-file-pdf" style="font-size:3rem; color:var(--accent-primary); opacity:0.5;"></i>
+                      </div>
+                    `}
+                    <div class="proc-linked-body">
+                      <h4>${proc.title}</h4>
+                      ${proc.date ? `<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-calendar"></i> ${proc.date}</p>` : ''}
+                      <p>${proc.description.substring(0, 100)}${proc.description.length > 100 ? '...' : ''}</p>
+                      <span class="proc-open-btn"><i class="fas fa-file-pdf"></i> Ouvrir le PDF</span>
                     </div>
-                  `}
-                  <div class="proc-linked-body">
-                    <h4>${proc.title}</h4>
-                    ${proc.date ? `<p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.5rem;"><i class="fas fa-calendar"></i> ${proc.date}</p>` : ''}
-                    <p>${proc.description.substring(0, 100)}${proc.description.length > 100 ? '...' : ''}</p>
-                    <span class="proc-open-btn">
-                      <i class="fas fa-file-pdf"></i> Ouvrir le PDF
-                    </span>
-                  </div>
-                </a>
+                  </a>
+                  <button class="present-trigger" onclick="presentPdf('${proc.file}','${proc.title}',event)"><i class="fas fa-expand"></i> Présenter</button>
+                </div>
               `).join('')}
             </div>
           </div>`;
