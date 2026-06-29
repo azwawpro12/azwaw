@@ -1,0 +1,53 @@
+{
+  "stages": [
+    {
+      "id": "maitrise-securite-2026",
+      "entreprise": "SASU NETBFRS",
+      "poste": "Technicien Réseau & Sécurité",
+      "lieu": "Marseille",
+      "periode": "Février 2026 — Avril 2026",
+      "date_debut": "Février 2026",
+      "date_fin": "Avril 2026",
+      "description": "Stage de 11 semaines au sein d'une entreprise spécialisée en sécurité physique et cybersécurité. Participation au déploiement d'infrastructure réseau Wi-Fi et configuration d'équipements réseau.",
+      "vitrine": "Images/stages/cover.jpg",
+      "missions": [
+        "Déploiement d'infrastructure Wi-Fi UniFi U7 Lite",
+        "Mise en place et configuration d'un contrôleur Wi-Fi UniFi",
+        "Mise en place d'un pare-feu et routeur pfSense",
+        "Configuration de switches NETGEAR GS308EP",
+        "Mise en place et gestion de VLANs",
+        "Sécurisation du réseau local"
+      ],
+      "competences": [
+        { "label": "Administration réseau", "icon": "fa-network-wired" },
+        { "label": "Configuration Wi-Fi professionnel", "icon": "fa-wifi" },
+        { "label": "Gestion des VLANs", "icon": "fa-sitemap" },
+        { "label": "Sécurité réseau", "icon": "fa-shield-halved" },
+        { "label": "Configuration pare-feu", "icon": "fa-fire" },
+        { "label": "Câblage & infrastructure", "icon": "fa-plug" },
+        { "label": "Administration Linux (Debian)", "icon": "fa-terminal" },
+        { "label": "Communication client", "icon": "fa-handshake" }
+      ],
+      "technologies": [
+        "UniFi U7 Lite",
+        "2 mini PCs (contrôleur Wi-Fi + pfSense)",
+        "NETGEAR GS308EP",
+        "VLANs",
+        "TP-Link TL-SG1005P V2",
+        "Debian 12",
+        "Ventoy",
+        "Rufus",
+        "pfSense",
+        "SSH"
+      ],
+      "related_procedures": ["unifi-os-server"],
+      "photos": [
+        "Images/stages/photo1.jpg",
+        "Images/stages/photo2.jpg",
+        "Images/stages/photo3.jpg"
+      ],
+      "rapport": "fi/rapport-stage.pdf",
+      "e5": "fi/E5.pdf"
+    }
+  ]
+}

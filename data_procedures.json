@@ -64,7 +64,23 @@
       "date": "October 2025",
       "file": "fi/zn.pdf",
       "vitrine": "Images/rs.jpg"
-    }
+    },
+    {
+      "id": "unifi-os-server",
+      "title": "Installation et configuration UniFi OS Server",
+      "description": "Déploiement d'un contrôleur Wi-Fi UniFi OS Server sur Debian 12 via Podman. Configuration de l'IP statique, installation du service, adoption d'un point d'accès U7 Outdoor et création d'un réseau Wi-Fi — réalisé lors du stage chez SASU NETBFRS.",
+      "date": "mai 2026",
+      "file": "fi/unifi-os-server.pdf",
+      "vitrine": "Images/unifi.png"
+    },
+    {
+  "id": "glpi-installation",
+  "title": "Installation et configuration de GLPI",
+  "description": "Déploiement de GLPI (Gestionnaire Libre de Parc Informatique) sur un serveur Linux dans le cadre du lab école MMT.local. Configuration de la base de données MariaDB, installation du service web Apache, paramétrage initial de l'outil et création des premiers tickets d'incident — réalisé dans le cadre du BTS SIO SISR à l'IFC Marseille.",
+  "date": "2026",
+  "file": "fi/glpi.pdf",
+  "vitrine": "Images/glpi.png"
+}
     
     
     

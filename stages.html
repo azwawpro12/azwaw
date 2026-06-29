@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stages - Azwaw</title>
+  <link rel="stylesheet" href="style.css?v=22">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .stages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .stage-card {
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      background: var(--bg-card);
+    }
+    .stage-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.09);
+      border-color: var(--green-border);
+    }
+    .stage-thumb {
+      width: 100%; height: 180px;
+      object-fit: cover; display: block;
+      border-bottom: 1px solid var(--border);
+    }
+    .stage-thumb-placeholder {
+      width: 100%; height: 180px;
+      background: var(--green-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: var(--green);
+      border-bottom: 1px solid var(--border);
+    }
+    .stage-body { padding: 1.5rem; }
+    .stage-body h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.3rem; }
+    .stage-entreprise {
+      font-size: 0.9rem; color: var(--green); font-weight: 600;
+      margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .stage-periode {
+      font-size: 0.8rem; color: var(--text-muted);
+      margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.35rem;
+    }
+    .stage-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+    .stage-read-more {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--green);
+      margin-top: 1rem; transition: gap 0.2s;
+    }
+    .stage-card:hover .stage-read-more { gap: 0.7rem; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="stages.html" class="active">Stages</a></li>
+        <li><a href="bts-sio.html">BTS SIO</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu">
+            <li><a href="projets.html">Tous</a></li>
+            <li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li>
+            <li><a href="projets.html?cat=professional">Pro</a></li>
+          </ul>
+        </li>
+        <li><a href="Procédures.html">Procédures</a></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html">CV</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <div class="page-head">
+    <span class="eyebrow">EXPÉRIENCE</span>
+    <h1 class="page-head-title">Mes Stages</h1>
+    <p class="page-head-sub">Expériences professionnelles et terrains</p>
+  </div>
+
+  <main class="page-main">
+    <div class="container">
+      <div class="stages-grid" id="stagesGrid"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+  <script src="scripts.js?v=13"></script>
+  <script>
+    async function loadStages() {
+      const grid = document.getElementById('stagesGrid');
+      try {
+        const res = await fetch('data_stages.json');
+        const data = await res.json();
+        if (!data.stages || data.stages.length === 0) {
+          grid.innerHTML = '<p style="color:var(--text-muted);">Aucun stage pour le moment.</p>';
+          return;
+        }
+        grid.innerHTML = data.stages.map(s => `
+          <a href="stage-detail.html?id=${s.id}" class="stage-card">
+            ${s.vitrine
+              ? `<img src="${s.vitrine}" alt="${s.entreprise}" class="stage-thumb" loading="lazy">`
+              : `<div class="stage-thumb-placeholder"><i class="fas fa-briefcase"></i></div>`}
+            <div class="stage-body">
+              <div class="stage-entreprise"><i class="fas fa-building"></i> ${s.entreprise}</div>
+              <h3>${s.poste}</h3>
+              <div class="stage-periode"><i class="fas fa-calendar-alt"></i> ${s.periode}</div>
+              <p class="stage-desc">${s.description.substring(0, 120)}...</p>
+              ${s.technologies && s.technologies.length ? `<div class="tags" style="margin-top:0.85rem;">${s.technologies.slice(0,4).map(t => `<span>${t}</span>`).join('')}${s.technologies.length > 4 ? `<span>+${s.technologies.length - 4}</span>` : ''}</div>` : ''}
+              <div class="stage-read-more">Voir le détail <i class="fas fa-arrow-right"></i></div>
+            </div>
+          </a>
+        `).join('');
+      } catch(e) {
+        grid.innerHTML = '<p style="color:var(--text-muted);">Impossible de charger les stages.</p>';
+      }
+    }
+    loadStages();
+  </script>
+</body>
+</html>

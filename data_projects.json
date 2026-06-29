@@ -23,7 +23,7 @@
       "category": "school",
       "tags": ["pfSense", "Proxmox", "Active Directory", "GLPI", "Zabbix"],
       "vitrine": "Images/infra.png",    
-      "schema": "Images/she.jpg",       
+      "schema": "Images/she.png",       
       "date": "2026-02-15",
        "links": {
         "github": "",
@@ -31,19 +31,21 @@
       },
       "related_procedures":["ad", "gpo","pfsense","zabbix","ex"]
     }
-    ,{
-      "id": "proj-automation-qa-2025",
-      "title": "Projet Automation QA - Tests Automatisés",
-      "description": "Mise en place d'une suite de tests automatisés pour API REST et interface web. Framework Selenium + Java + TestNG. 150+ tests unitaires et d'intégration. CI/CD avec GitHub Actions. Couverture code: 92%.\n\nEnvironnement: Jenkins, Selenium Grid, Java, API REST JSON.",
-      "category": "personal",
-      "tags": ["Selenium", "Java", "TestNG", "CI/CD","API Testing"],
-      "icon": "fa-solid fa-robot",
-      "images": ["proj-automation-1.png"],
-      "date": "2025-01-10",
+    ,
+    {
+      "id": "stage-netbfrs-2026",
+      "title": "Déploiement infrastructure Wi-Fi & Sécurité — Stage NETBFRS",
+      "description": "Déploiement complet d'une infrastructure réseau Wi-Fi professionnelle au sein de SASU NETBFRS lors d'un stage de 11 semaines.\n\nInstallation et configuration d'un contrôleur UniFi OS Server sur Debian 12 (Podman). Adoption et configuration d'un point d'accès UniFi U7 Lite. Mise en place d'un pare-feu pfSense pour sécuriser le réseau. Configuration de switches NETGEAR GS308EP et TP-Link. Création et gestion de VLANs pour la segmentation du réseau. Sécurisation du réseau local.",
+      "category": "professional",
+      "tags": ["UniFi", "pfSense", "VLANs", "Debian", "Wi-Fi", "Sécurité réseau"],
+      "vitrine": "Images/unifi.png",
+      "schema": "",
+      "date": "2026-04-30",
       "links": {
-        "github": "https://github.com/azwaw7/NopCommerce/tree/master/NopCommercee",
-        "demo": "#"
-      }
+        "github": "",
+        "demo": ""
+      },
+      "related_procedures": ["unifi-os-server"]
     }
   ]
 }

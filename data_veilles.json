@@ -19,6 +19,56 @@
       "vitrine": "Images/juri.png",
       "link": "https://rgpd.com/fr/nis2/chapitre-5-competence-et-enregistrement/article-27-registre-des-entites/",
       "date": "2025"
-    }
+    },
+     {
+  "id": "veille2",
+  "type": "technologique",
+  "title": "CCNA 200-301 V2.0 — Ce qui change en février 2027",
+  "description": "Cisco a annoncé le 20 mai 2026 une mise à jour majeure du blueprint CCNA 200-301, passant de la version 1.1 à la version 2.0. Cette nouvelle version intègre le troubleshooting (28% des topics), l'IA appliquée aux réseaux, l'automatisation avec Ansible et Terraform, et davantage de labs pratiques.",
+  "fullDescription": "Cisco a annoncé le 20 mai 2026 une mise à jour majeure du blueprint CCNA 200-301, passant de la version 1.1 à la version 2.0, effective le 3 février 2027. Le grand retour du troubleshooting représente désormais 28% des sujets d'examen, contre quasiment zéro dans les versions précédentes. L'examen intègre également de nouveaux sujets comme l'Intelligence Artificielle et le Machine Learning appliqués aux réseaux, des outils d'automatisation tels qu'Ansible et Terraform, ainsi qu'un renforcement des fondamentaux en sécurité. On attend aussi davantage de questions sous forme de labs interactifs. Les topics de troubleshooting avancé sont quant à eux transférés au niveau CCNP. Le code d'examen reste 200-301, la durée 120 minutes, le score de passage 825/1000 et le tarif 300$. Cette mise à jour reflète une évolution claire du marché : les entreprises veulent des profils capables de diagnostiquer et résoudre des pannes réelles, pas seulement des techniciens théoriques.",
+  "vitrine": "Images/ccna2.jpg",
+  "link": "https://www.certskills.com/ccna26-01/",
+  "date": "2026"
+},
+{
+  "id": "veille3",
+  "type": "technologique",
+  "title": "ZTNA : une alternative moderne au VPN pour sécuriser les accès en entreprise",
+  "description": "Le Zero Trust Network Access (ZTNA) s'impose en 2026 comme une alternative moderne au VPN traditionnel pour les accès applicatifs. Basé sur le principe « ne jamais faire confiance, toujours vérifier », il offre un accès uniquement aux applications autorisées et non à l'ensemble du réseau, réduisant drastiquement la surface d'attaque — sans pour autant remplacer le VPN dans tous les contextes.",
+  "fullDescription": "Le Zero Trust Network Access (ZTNA) représente une évolution majeure dans la sécurité des accès réseau en entreprise. Contrairement au VPN qui place l'utilisateur « à l'intérieur » du réseau une fois authentifié, le ZTNA applique le principe « ne jamais faire confiance, toujours vérifier » : chaque tentative d'accès est évaluée en temps réel selon l'identité de l'utilisateur, l'état de l'appareil et le contexte (lieu, heure, comportement). L'utilisateur n'accède qu'à l'application dont il a besoin, jamais à l'ensemble du réseau, ce qui limite fortement les risques de déplacement latéral en cas de compromission. Cependant, le ZTNA n'est pas un remplacement universel du VPN : pour des usages nécessitant un accès complet au réseau interne comme pour un administrateur système, ou dans des environnements industriels avec des équipements legacy, le VPN reste pertinent. En 2026, 65% des entreprises prévoient tout de même de remplacer leur VPN par une solution ZTNA pour les accès applicatifs. Le marché mondial est estimé à près de 2 milliards de dollars en 2025 et devrait atteindre 11 milliards en 2033. Les grands acteurs comme Zscaler, Cloudflare Access et Cisco Duo proposent des solutions ZTNA intégrées dans des architectures SASE. Le NCSC a publié en mai 2026 de nouvelles recommandations soulignant que beaucoup de déploiements échouent non par manque de technologie, mais parce que les anciens modèles de confiance sont conservés dans les nouvelles architectures.",
+  "vitrine": "Images/ztna.png",
+  "link": "https://www.ncsc.gov.uk/blogs/designing-secure-access-with-ztna",
+  "date": "2026"
+},{
+  "id": "veille6",
+  "type": "technologique",
+  "title": "Patch Tuesday juin 2026 : le plus grand jamais publié par Microsoft — 200 failles, 3 zero-days",
+  "description": "Le 9 juin 2026, Microsoft a publié son Patch Tuesday mensuel, le plus volumineux depuis la création du programme en 2003 : 200 vulnérabilités corrigées dont 33 critiques et 3 zero-days. Les composants touchés incluent Windows, Active Directory, Hyper-V, BitLocker, RDP, Exchange Server et HTTP.sys.",
+  "fullDescription": "Ce Patch Tuesday de juin 2026 est historique par son volume. Parmi les vulnérabilités les plus critiques : CVE-2026-47291, une faille RCE (exécution de code à distance) dans HTTP.sys notée CVSS 9.8 — un serveur exposé peut être compromis sans authentification ; CVE-2026-45586, une élévation de privilèges via le composant CTFMON de Windows permettant d'obtenir les droits SYSTEM ; CVE-2026-50507, un contournement de BitLocker exploitable par accès physique permettant d'accéder aux données chiffrées ; CVE-2026-47288, une RCE critique dans le KDC Kerberos touchant directement les contrôleurs de domaine Active Directory ; et 12 failles RDP dont 8 critiques permettant à un attaquant de prendre le contrôle du poste client lors d'une connexion vers un serveur malveillant. Une faille Exchange Server (CVE-2026-42897) était déjà activement exploitée avant la publication du correctif. Ce Patch Tuesday illustre une tendance importante : Microsoft utilise désormais l'IA pour détecter des failles en amont, mais cela génère aussi plus de corrections hors cycle mensuel. Pour un administrateur système, appliquer ces correctifs rapidement est critique, en priorité sur les contrôleurs de domaine, les serveurs Exchange et les postes utilisant RDP.",
+  "vitrine": "Images/mi.png",
+  "link": "https://www.it-connect.fr/patch-tuesday-juin-2026-200-failles-de-securite-patchees-dont-3-zero-day/",
+  "date": "2026"
+},
+{
+  "id": "veille5",
+  "type": "juridique",
+  "title": "AI Act : le règlement européen sur l'IA devient pleinement applicable le 2 août 2026",
+  "description": "L'AI Act (Règlement UE 2024/1689), premier cadre juridique mondial sur l'intelligence artificielle, entre en application complète le 2 août 2026. En France, la CNIL a été désignée autorité de référence pour son application. Toute entreprise qui développe ou utilise de l'IA en Europe est concernée, avec des sanctions pouvant atteindre 35 millions d'euros ou 7% du chiffre d'affaires mondial.",
+  "fullDescription": "L'AI Act classe les systèmes d'IA en quatre niveaux de risque : inacceptable (interdit depuis février 2025), haut risque, risque limité et risque minimal. Les obligations les plus contraignantes concernent les IA à haut risque : biométrie, infrastructure critique, recrutement, accès aux services publics, application de la loi. Depuis le 2 août 2026, ces systèmes doivent être enregistrés dans la base de données européenne, obtenir un marquage CE, documenter leur fonctionnement et prévoir un contrôle humain. En France, la CNIL est l'autorité principale de contrôle, aux côtés de l'ANSSI pour les aspects cybersécurité et de l'ARCOM pour les contenus audiovisuels. Le règlement se cumule avec le RGPD : une entreprise utilisant une IA qui traite des données personnelles doit respecter les deux textes simultanément. Les sanctions sont graduées : jusqu'à 35 millions d'euros ou 7% du CA pour les pratiques interdites, jusqu'à 15 millions ou 3% pour les manquements aux obligations des systèmes à haut risque. Pour un technicien SISR ou un administrateur système, cela impacte concrètement tout déploiement d'outil d'IA dans l'infrastructure : chatbots, outils de supervision intelligents, systèmes de détection d'anomalies.",
+  "vitrine": "Images/cnil.jpg",
+  "link": "https://www.cnil.fr/fr/entree-en-vigueur-du-reglement-europeen-sur-lia-les-premieres-questions-reponses-de-la-cnil",
+  "date": "2026"
+},
+{
+  "id": "veille4",
+  "type": "juridique",
+  "title": "RGPD : la CNIL atteint un record historique de sanctions en 2025 et maintient la pression en 2026",
+  "description": "En 2025, la CNIL a prononcé 83 sanctions pour un montant record de 486,8 millions d'euros, contre seulement 55,2 millions en 2024. Google (325 M€) et Shein (150 M€) figurent parmi les plus grandes amendes. Début 2026, Free (42 M€) et France Travail (5 M€) ont déjà été sanctionnés pour des failles de sécurité.",
+  "fullDescription": "L'année 2025 restera un tournant majeur pour le RGPD en France. La CNIL a prononcé 83 sanctions pour un montant cumulé record de 486,8 millions d'euros, soit une multiplication par neuf par rapport à 2024 (55,2 millions d'euros). Les deux sanctions les plus importantes concernent Google (325 millions d'euros) et Shein (150 millions d'euros), tous deux sanctionnés pour non-conformité en matière de cookies et de traceurs. Début 2026, la pression ne faiblit pas : Free a écopé de 42 millions d'euros en janvier 2026 suite à une violation de données massive, France Travail de 5 millions d'euros pour absence d'authentification multifacteur et droits d'accès trop larges, et IQVIA Operations France de 5 millions d'euros en mai 2026. Ce qui change concrètement : la CNIL utilise désormais des outils automatisés pour scanner les sites web à grande échelle, ce qui signifie qu'une PME avec un bandeau cookies non conforme peut être détectée sans qu'aucun agent ne visite son site. En 2025, 32% des entreprises contrôlées étaient des PME ou TPE. Depuis août 2025, la CNIL est également devenue autorité de régulation de l'IA Act en France, ajoutant une nouvelle dimension à son périmètre de contrôle. Pour les techniciens et administrateurs système, les enseignements sont clairs : le MFA sur tous les accès distants, l'audit des droits d'accès et la conformité cookies ne sont plus optionnels.",
+  "vitrine": "Images/cnil.jpg",
+  "link": "https://www.cnil.fr/fr/bilan-sanctions-2025",
+  "date": "2026"
+}
+  
   ]
 }

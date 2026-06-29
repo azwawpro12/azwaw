@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stage - Azwaw</title>
+  <link rel="stylesheet" href="style.css?v=22">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .missions-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    .missions-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+    .missions-list li::before { content: ''; width: 8px; height: 8px; min-width: 8px; border-radius: 50%; background: var(--green); margin-top: 0.45rem; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.5rem; }
+    @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gallery-item { aspect-ratio: 4/3; overflow: hidden; border-radius: 10px; border: 1px solid var(--border); cursor: pointer; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; display: block; }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .gallery-item::after { content: '\f00e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; background: rgba(0,0,0,0.35); opacity: 0; transition: opacity 0.2s; }
+    .gallery-item:hover::after { opacity: 1; }
+
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .lightbox-close { position: fixed; top: 1.25rem; right: 1.5rem; font-size: 2rem; color: white; cursor: pointer; background: none; border: none; line-height: 1; opacity: 0.8; transition: opacity 0.2s; }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-prev, .lightbox-next { position: fixed; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: white; cursor: pointer; background: rgba(255,255,255,0.1); border: none; padding: 0.75rem 1rem; border-radius: 8px; opacity: 0.8; transition: opacity 0.2s, background 0.2s; }
+    .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; background: rgba(255,255,255,0.2); }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+    .lightbox-counter { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+
+    .docs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .doc-card { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1.75rem 1rem; border: 1px solid var(--border); border-radius: 12px; text-align: center; cursor: pointer; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; background: var(--bg-card); }
+    .doc-card:hover { transform: translateY(-3px); border-color: var(--green-border); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .doc-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--green-light); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    .doc-label { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+    .doc-hint { font-size: 0.75rem; color: var(--text-muted); }
+
+    .detail-section { margin-bottom: 3rem; }
+    .detail-section-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--green-light); display: flex; align-items: center; gap: 0.6rem; }
+    .detail-section-title i { color: var(--green); }
+    .no-photos { text-align: center; padding: 3rem; color: var(--text-muted); background: var(--bg-secondary); border-radius: 12px; border: 1px dashed var(--border); margin-top: 1rem; }
+
+    .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; }
+    .comp-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; transition: border-color 0.2s, background 0.2s; }
+    .comp-item:hover { border-color: var(--green-border); background: var(--green-light); }
+    .comp-item i { width: 32px; height: 32px; border-radius: 8px; background: var(--green-light); color: var(--green); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+    .comp-item span { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); line-height: 1.3; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><span class="logo-icon"><i class="fas fa-user-tie"></i></span><span class="logo-text">Azwaw</span></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="stages.html" class="active">Stages</a></li>
+        <li><a href="bts-sio.html">BTS SIO</a></li>
+        <li><a href="competences.html">TCS</a></li>
+        <li class="dropdown"><a href="projets.html">Projets <i class="fas fa-caret-down"></i></a>
+          <ul class="submenu">
+            <li><a href="projets.html">Tous</a></li>
+            <li><a href="projets.html?cat=personal">Personnels</a></li>
+            <li><a href="projets.html?cat=school">École</a></li>
+            <li><a href="projets.html?cat=professional">Pro</a></li>
+          </ul>
+        </li>
+        <li><a href="Procédures.html">Procédures</a></li>
+        <li><a href="veilles.html">Veilles</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="cv.html">CV</a></li>
+      </ul>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+      <button class="mobile-menu-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <div class="page-head">
+    <span class="eyebrow">STAGE</span>
+    <h1 class="page-head-title" id="stagePoste">Chargement...</h1>
+    <p class="page-head-sub" id="stageSubtitle"></p>
+  </div>
+
+  <main class="page-main">
+    <div class="container" style="max-width:900px;">
+      <a href="stages.html" class="back-btn" onclick="event.preventDefault();history.back();">
+        <i class="fas fa-arrow-left"></i> Retour
+      </a>
+
+      <!-- Description -->
+      <div class="detail-section card" style="padding:2rem;margin-bottom:2rem;">
+        <p id="stageDesc" style="color:var(--text-secondary);line-height:1.8;font-size:1rem;"></p>
+      </div>
+
+      <!-- Missions -->
+      <div class="detail-section">
+        <h2 class="detail-section-title"><i class="fas fa-tasks"></i> Missions réalisées</h2>
+        <ul class="missions-list" id="missionsList"></ul>
+      </div>
+
+      <!-- Compétences acquises -->
+      <div class="detail-section" id="compSection" style="display:none;">
+        <h2 class="detail-section-title"><i class="fas fa-star"></i> Compétences acquises</h2>
+        <div class="comp-grid" id="compGrid"></div>
+      </div>
+
+      <!-- Technologies -->
+      <div class="detail-section" id="techSection" style="display:none;">
+        <h2 class="detail-section-title"><i class="fas fa-microchip"></i> Technologies utilisées</h2>
+        <div class="tags" id="techTags" style="gap:0.6rem;flex-wrap:wrap;display:flex;"></div>
+      </div>
+
+      <!-- Galerie -->
+      <div class="detail-section" id="gallerySection">
+        <h2 class="detail-section-title"><i class="fas fa-images"></i> Photos du stage</h2>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="no-photos" id="noPhotos" style="display:none;">
+          <i class="fas fa-image" style="font-size:2rem;margin-bottom:0.5rem;display:block;"></i>
+          Aucune photo disponible pour ce stage.
+        </div>
+      </div>
+
+      <!-- Procédures liées -->
+      <div class="detail-section" id="proceduresSection" style="display:none;">
+        <h2 class="detail-section-title"><i class="fas fa-file-alt"></i> Procédures liées</h2>
+        <div id="proceduresList" style="display:flex;flex-wrap:wrap;gap:0.75rem;"></div>
+      </div>
+
+      <!-- Documents -->
+      <div class="detail-section" id="docsSection">
+        <h2 class="detail-section-title"><i class="fas fa-folder-open"></i> Documents</h2>
+        <div class="docs-grid" id="docsGrid"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <button class="lightbox-prev" onclick="lightboxNav(-1)"><i class="fas fa-chevron-left"></i></button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lightbox-next" onclick="lightboxNav(1)"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <footer class="footer"><div class="container"><p>© <span id="currentYear"></span> Azwaw</p></div></footer>
+  <script src="scripts.js?v=13"></script>
+  <script>
+    let photos = [];
+    let currentPhoto = 0;
+
+    async function loadStageDetail() {
+      const id = new URLSearchParams(window.location.search).get('id');
+      if (!id) { window.location.href = 'stages.html'; return; }
+
+      const res = await fetch('data_stages.json');
+      const data = await res.json();
+      const s = data.stages.find(x => x.id === id);
+      if (!s) { window.location.href = 'stages.html'; return; }
+
+      document.title = s.poste + ' — ' + s.entreprise + ' · Azwaw';
+      document.getElementById('stagePoste').textContent = s.poste;
+      document.getElementById('stageSubtitle').textContent = s.entreprise + ' · ' + s.lieu + ' · ' + s.periode;
+      document.getElementById('stageDesc').textContent = s.description;
+
+      // Missions
+      const ml = document.getElementById('missionsList');
+      ml.innerHTML = (s.missions && s.missions.length)
+        ? s.missions.map(m => `<li>${m}</li>`).join('')
+        : '<li>Aucune mission renseignée.</li>';
+
+      // Compétences acquises
+      if (s.competences && s.competences.length > 0) {
+        document.getElementById('compSection').style.display = 'block';
+        document.getElementById('compGrid').innerHTML = s.competences.map(c => `
+          <div class="comp-item">
+            <i class="fas ${c.icon}"></i>
+            <span>${c.label}</span>
+          </div>
+        `).join('');
+      }
+
+      // Technologies
+      if (s.technologies && s.technologies.length > 0) {
+        document.getElementById('techSection').style.display = 'block';
+        document.getElementById('techTags').innerHTML = s.technologies.map(t => `<span>${t}</span>`).join('');
+      }
+
+      // Galerie
+      photos = s.photos || [];
+      const gg = document.getElementById('galleryGrid');
+      if (photos.length > 0) {
+        gg.innerHTML = photos.map((p, i) => `
+          <div class="gallery-item" onclick="openLightbox(${i})">
+            <img src="${p}" alt="Photo stage ${i+1}" loading="lazy">
+          </div>
+        `).join('');
+      } else {
+        document.getElementById('noPhotos').style.display = 'block';
+      }
+
+      // Procédures liées
+      if (s.related_procedures && s.related_procedures.length > 0) {
+        try {
+          const pr = await fetch('data_procedures.json');
+          const pd = await pr.json();
+          const linked = pd.procedures.filter(p => s.related_procedures.includes(p.id));
+          if (linked.length > 0) {
+            document.getElementById('proceduresSection').style.display = 'block';
+            document.getElementById('proceduresList').innerHTML = linked.map(p => `
+              <div class="pdf-card-wrap">
+                <button class="btn btn-secondary" onclick="presentPdf('${p.file}', '${p.title}', event)" style="font-size:0.85rem;padding:0.5rem 1rem;">
+                  <i class="fas fa-expand"></i> ${p.title}
+                </button>
+              </div>
+            `).join('');
+          }
+        } catch(e) {}
+      }
+
+      // Documents
+      const docs = [];
+      if (s.rapport) docs.push({ label: 'Rapport de stage', icon: 'fa-file-alt',  file: s.rapport });
+      if (s.bilan)   docs.push({ label: 'Bilan de stage',   icon: 'fa-file-pdf',  file: s.bilan });
+      if (s.e5)      docs.push({ label: 'Dossier E5',       icon: 'fa-file-pdf',  file: s.e5 });
+      if (s.e6)      docs.push({ label: 'Dossier E6',       icon: 'fa-file-pdf',  file: s.e6 });
+
+      const dg = document.getElementById('docsGrid');
+      if (docs.length > 0) {
+        dg.innerHTML = docs.map(d => `
+          <div class="pdf-card-wrap">
+            <div class="doc-card" onclick="presentPdf('${d.file}', '${d.label}', event)">
+              <div class="doc-icon"><i class="fas ${d.icon}"></i></div>
+              <span class="doc-label">${d.label}</span>
+              <span class="doc-hint"><i class="fas fa-expand" style="font-size:0.7rem;"></i> Présenter · <a href="${d.file}" target="_blank" onclick="event.stopPropagation()" style="color:var(--green);">Onglet</a></span>
+            </div>
+            <button class="present-trigger" onclick="presentPdf('${d.file}', '${d.label}', event)">
+              <i class="fas fa-expand"></i> Présenter
+            </button>
+          </div>
+        `).join('');
+      } else {
+        document.getElementById('docsSection').style.display = 'none';
+      }
+    }
+
+    function openLightbox(i) {
+      currentPhoto = i;
+      document.getElementById('lightboxImg').src = photos[i];
+      document.getElementById('lightbox').classList.add('open');
+      updateCounter();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeLightboxOnBg(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
+    function lightboxNav(d) {
+      currentPhoto = (currentPhoto + d + photos.length) % photos.length;
+      document.getElementById('lightboxImg').src = photos[currentPhoto];
+      updateCounter();
+    }
+    function updateCounter() {
+      document.getElementById('lightboxCounter').textContent = (currentPhoto + 1) + ' / ' + photos.length;
+    }
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') lightboxNav(1);
+      if (e.key === 'ArrowLeft')  lightboxNav(-1);
+    });
+
+    loadStageDetail();
+  </script>
+</body>
+</html>
